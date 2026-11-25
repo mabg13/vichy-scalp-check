@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vichy Scalp Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm, dermatological, reassuring — a pharmacy-grade scalp check.
+   IDEA: a lab test report you carry in your pocket: readings, sources, a prescription-like routine.
+   PICTURE: the score ring + four reading tiles; the calibration card with vial and pH strip.
+   COLOUR and TYPE: deep teal-black #0B252B, lime accent #D8F396, four soft pastel tiles; DM Sans.
+   LAYOUT: one phone-width column (max 460px), sticky bottom tabs in the app view. */
+:root{--bg:#EEF2EF;--navy:#0B252B;--navy2:#173D43;--ink:#0B252B;--muted:#5C6B68;--line:#DDE4E1;--card:#fff;--lime:#D8F396;--limeD:#C1E074;--green:#2E7D66;
+--t1:#F3DACB;--i1:#7A3E22;--b1:#E3A07F;--t2:#DDEBD3;--i2:#2E6B3F;--b2:#86BC72;--t3:#EFE3CF;--i3:#6E5530;--b3:#CDAE80;--t4:#E4DAF1;--i4:#4F3D86;--b4:#A48FD3;color-scheme:light}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 "DM Sans",-apple-system,"Segoe UI",Arial,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,label:focus-within{outline:3px solid #6aa7ff;outline-offset:2px}
+.app{max-width:460px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative;padding-bottom:96px}
+@media(min-width:620px){body{background:#DCE4E0}.app{box-shadow:0 0 0 1px #cfd8d4,0 30px 80px rgba(11,37,43,.12)}}
+.hero{background:var(--navy);color:#fff;border-radius:0 0 28px 28px;padding:22px 20px 26px;position:relative;overflow:hidden}
+.hero{background:radial-gradient(120% 90% at 100% 0%,#1d4a4f 0%,#0B252B 55%)}
+.hero .strands{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.55}
+.art{position:relative;height:250px;margin:6px -20px 0}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.lens{position:absolute;left:50%;top:50%;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 4px #D8F396,0 0 0 12px rgba(216,243,150,.18),0 20px 40px rgba(0,0,0,.35)}
+.lens svg{position:absolute;inset:0;width:100%;height:100%}
+.lens:after{content:"";position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#D8F396,transparent);box-shadow:0 0 12px #D8F396;animation:scan 2.6s ease-in-out infinite}
+@keyframes scan{0%,100%{top:12%}50%{top:86%}}
+.pin{position:absolute;background:#fff;color:#0B252B;font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px;box-shadow:0 6px 16px rgba(0,0,0,.25);white-space:nowrap}
+.pin i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.lang{display:flex;background:rgba(255,255,255,.12);border-radius:99px;padding:3px}.lang button{min-width:40px;min-height:34px;border-radius:99px;color:#fff;font-size:12px;font-weight:700;opacity:.75}.lang button.on{background:#fff;color:#0B252B;opacity:1}
+.quip{position:relative;display:inline-block;background:#fff;color:#0B252B;font-size:14px;font-weight:600;line-height:1.35;padding:10px 14px;border-radius:16px 16px 16px 4px;margin:4px 0 6px;max-width:100%}
+.quip b{color:#2E7D66}
+.cycle{min-height:1.5em;text-align:center;font-weight:600;color:var(--green)}
+.hero>*{position:relative;z-index:1}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.brand b{font-size:13px;letter-spacing:.06em;color:var(--lime)}
+.brand small{display:block;font-size:11px;opacity:.7;letter-spacing:.03em}
+.iconbtn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff}
+.iconbtn svg{width:20px;height:20px}
+h1{font-family:Manrope,"DM Sans",sans-serif;font-size:31px;line-height:1.06;margin:18px 0 8px;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+h2{font-family:Manrope,"DM Sans",sans-serif;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--lime)}
+h2{font-size:22px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+h3{font-size:16px;margin:0 0 4px}
+.lead{opacity:.82;margin:0;font-size:15px}
+.wrap{padding:16px}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;border:1px solid var(--line)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.label{font-size:13px;font-weight:600;color:var(--green);margin-bottom:6px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:16px;background:var(--lime);font-weight:700;font-size:16px;color:var(--navy);transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn.dark{background:var(--navy);color:#fff}
+.btn.ghost{background:#fff;border:1px solid var(--line)}
+.btn.link{background:none;min-height:44px;font-weight:600;color:var(--green);text-decoration:underline}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.row{display:flex;gap:10px;align-items:center}
+.steps .st{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.steps .st:last-child{border:0}
+.num{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:#EEF2EF;color:var(--navy2);white-space:nowrap}
+.profiles{display:grid;gap:8px}
+.prof{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);min-height:56px}
+.prof b{display:block;font-size:15px}.prof span{font-size:13px;color:var(--muted)}
+.top{display:flex;align-items:center;gap:10px;padding:14px 16px 4px}
+.top .iconbtn{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.prog{flex:1;height:6px;border-radius:9px;background:#d5ddd9;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--green);border-radius:9px;transition:width .3s}
+.opts{display:grid;gap:10px;margin-top:16px}
+.opt{width:100%;text-align:left;padding:16px;border-radius:16px;background:#fff;border:1.5px solid var(--line);font-weight:600;min-height:56px}
+.opt.on{border-color:var(--navy);background:#F5F9E8}
+.shot{position:relative;border-radius:20px;overflow:hidden;background:#1a2f33;aspect-ratio:3/4;display:grid;place-items:center;color:#fff}
+.shot img,.shot canvas{width:100%;height:100%;object-fit:cover;display:block}
+.guide{position:absolute;inset:14% 18%;border:2px dashed rgba(216,243,150,.9);border-radius:50%;pointer-events:none}
+.guide.rect{inset:12% 10%;border-radius:14px}
+.shot .tag{position:absolute;left:12px;bottom:12px;background:rgba(11,37,43,.8);padding:6px 10px;border-radius:10px;font-size:13px}
+.thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.thumbs div{border-radius:12px;overflow:hidden;aspect-ratio:3/4;background:#dfe6e3;position:relative}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.thumbs span{position:absolute;left:6px;bottom:6px;font-size:11px;background:rgba(255,255,255,.9);padding:2px 6px;border-radius:6px;font-weight:600}
+.file{position:absolute;width:1px;height:1px;opacity:0}
+.kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.kit div{background:#F6F8F7;border-radius:14px;padding:10px;text-align:center;font-size:12px;font-weight:600}
+.kit svg{width:44px;height:56px;display:block;margin:0 auto 6px}
+ol.how{padding-left:20px;margin:8px 0 0}ol.how li{margin-bottom:6px}
+.timer{font-size:44px;font-weight:700;text-align:center;letter-spacing:.02em;margin:8px 0;font-variant-numeric:tabular-nums}
+.cardwrap{position:relative;border-radius:16px;overflow:hidden;background:#222;touch-action:manipulation}
+.cardwrap canvas{display:block;width:100%;height:auto}
+.mark{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border:3px solid #fff;border-radius:50%;box-shadow:0 0 0 2px var(--navy);pointer-events:none}
+.mark b{position:absolute;top:-24px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:11px;padding:1px 6px;border-radius:6px;white-space:nowrap}
+.read{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.read:last-child{border:0}
+.sw{width:44px;height:44px;border-radius:12px;border:1px solid rgba(0,0,0,.08)}
+.read .v{font-weight:700;font-size:18px;text-align:right;white-space:nowrap}
+.fuse{display:grid;gap:10px;margin:24px 0}
+.src{display:flex;gap:12px;align-items:center;padding:14px;border-radius:16px;background:#fff;border:1px solid var(--line);opacity:.35;transition:opacity .4s}
+.src.on{opacity:1}
+.src i{width:12px;height:12px;border-radius:50%;background:var(--limeD);flex:none}
+.spin{width:64px;height:64px;margin:20px auto;border-radius:50%;border:6px solid #d5ddd9;border-top-color:var(--green);animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.score{display:flex;gap:16px;align-items:center;margin-top:14px}
+.ring{width:110px;height:110px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring div{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1}
+.ring b{font-size:34px}.ring small{display:block;font-size:10px;opacity:.75;margin-top:4px;letter-spacing:.04em}
+.mp{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}.mp button{min-height:34px;padding:4px 12px;border-radius:99px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:700}.mp button.on{background:var(--lime);color:var(--navy)}
+.delta{display:inline-block;background:rgba(216,243,150,.18);color:var(--lime);font-size:13px;font-weight:600;padding:3px 9px;border-radius:99px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.tile{border-radius:18px;padding:12px 14px}
+.tile .n{font-size:13px;font-weight:600}
+.tile .val{font-size:30px;font-weight:700;line-height:1.1;margin:2px 0}
+.tile .lv{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.bar{height:5px;border-radius:9px;background:rgba(255,255,255,.7);margin-top:8px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px}
+.tile .from{font-size:11px;margin-top:6px;opacity:.85}
+.tile.locked{background:#fff!important;border:1.5px dashed var(--line);color:var(--muted)}
+.cause{background:var(--navy);color:#fff;border:0}
+.cause .label{color:var(--lime)}
+.ev{display:grid;gap:6px;margin-top:10px}
+.ev div{display:flex;gap:8px;font-size:14px;align-items:flex-start}
+.ev div:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lime);flex:none;margin-top:8px}
+.prod{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.prod:last-of-type{border-bottom:0}
+.pack{width:72px;height:100px;border-radius:12px;display:grid;place-items:center}
+.pack svg{width:46px;height:84px}
+.prod .b{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+.prod h3{font-size:15px;line-height:1.25;margin:2px 0}
+.why{font-size:13px;background:#F5F9E8;border-radius:10px;padding:6px 9px;margin-top:6px}
+.use{font-size:13px;color:var(--muted);margin-top:4px}
+.buy{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:12px;background:var(--navy);color:#fff;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.field{width:100%;min-height:48px;border-radius:12px;border:1.5px solid var(--line);padding:0 14px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:10px 0}.check input{width:20px;height:20px;flex:none;margin-top:1px;accent-color:#0B252B}
+.price{font-weight:700;white-space:nowrap;margin-top:6px}
+.fig{position:relative;height:200px}.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.seg button{font-size:13px;font-weight:600;padding:7px 12px;border-radius:99px;background:#EEF2EF;min-height:36px}
+.seg button.on{background:var(--navy);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:12px;color:var(--muted);font-weight:600}
+.up{color:var(--green);font-weight:700}.down{color:#B4432D;font-weight:700}
+.ba{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ba div{border-radius:14px;overflow:hidden;aspect-ratio:3/4;position:relative;background:#dfe6e3}
+.ba img{width:100%;height:100%;object-fit:cover}
+.ba span{position:absolute;left:8px;top:8px;background:rgba(255,255,255,.92);font-size:12px;font-weight:700;padding:2px 8px;border-radius:8px}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:460px;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px));z-index:5}
+.tabs button{display:grid;justify-items:center;gap:2px;font-size:12px;font-weight:600;color:var(--muted);min-height:52px;padding-top:6px;border-radius:12px}
+.tabs button.on{color:var(--navy);background:#F5F9E8}
+.tabs svg{width:22px;height:22px}
+.disc{font-size:12px;color:var(--muted);text-align:center;padding:4px 16px 16px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:9;max-width:90vw;text-align:center}
+.sheet{position:fixed;inset:0;background:rgba(11,37,43,.45);z-index:10;display:flex;align-items:flex-end;justify-content:center}
+.sheet>div{background:var(--bg);width:100%;max-width:460px;border-radius:24px 24px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px))}
+.note{font-size:13px;background:#FFF5D9;color:#6E5530;border-radius:12px;padding:10px 12px;margin-top:10px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div id="layer"></div>
+<script>
+{
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eur=v=>"€"+v.toFixed(2);
+const DAY=864e5;
+const fmtDate=t=>new Date(t).toLocaleDateString(LANG==="fr"?"fr-FR":"en-GB",{day:"numeric",month:"short"});
+const sv=(d,w=1.7)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const IC={
+ back:sv('<path d="M15 5l-7 7 7 7"/>',2),
+ menu:sv('<circle cx="12" cy="5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="19" r="1.3"/>',2),
+ report:sv('<path d="M7 3h10l3 3v15H4V3h3"/><path d="M8 11h8M8 15h8M8 7h4"/>'),
+ bottle:sv('<path d="M10 2h4M10 2v3l-2 2v13a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7l-2-2V2M8 12h8"/>'),
+ chart:sv('<path d="M3 20h18M6 16l4-5 4 3 5-7"/>'),
+ arrow:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+ cam:sv('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>')
+};
+
+/* ---------- language (EN / FR) ---------- */
+let LANG=(()=>{try{return localStorage.getItem("dercos.lang")||"en"}catch(e){return "en"}})();
+const FR={
+"VICHY LABORATOIRES":"VICHY LABORATOIRES","Scalp Check AI · Dercos range · concept demo":"Scalp Check IA · gamme Dercos · démo concept",
+"Vichy Scalp Check:":"Vichy Scalp Check :","photo + home test.":"photo + test maison.",
+"Photos show the symptoms. A 3-minute home test reveals the cause. Together, they pick the right Vichy Dercos routine — then track the change every month.":"Les photos montrent les symptômes. Un test maison de 3 minutes révèle la cause. Ensemble, ils choisissent la bonne routine Vichy Dercos — puis suivent l'évolution chaque mois.",
+"Four quick questions":"Quatre questions rapides","Your concern, your scalp, your habits. 30 seconds.":"Votre problème, votre cuir chevelu, vos habitudes. 30 secondes.",
+"Three guided photos":"Trois photos guidées","Crown, parting, temples. The AI reads density and flakes.":"Sommet du crâne, raie, tempes. L'IA mesure la densité et les pellicules.",
+"Home test kit":"Kit de test maison","A keratin vial and a pH strip, read by your phone on a calibration card.":"Un flacon kératine et une bandelette pH, lus par votre téléphone sur une carte d'étalonnage.",
+"Start my scalp check":"Commencer mon scalp check","Try a demo profile · 3 months of tracking":"Essayer un profil démo · 3 mois de suivi",
+"Hair fall from the root":"Chute depuis la racine","Thinks it's hair fall — it's breakage":"Croit perdre ses cheveux — c'est de la casse","Dandruff linked to scalp pH":"Pellicules liées au pH du cuir chevelu",
+"Concept demonstration · cosmetic guidance, not a medical diagnosis. Sudden or patchy hair loss: see a dermatologist.":"Démonstration de concept · conseil cosmétique, pas un diagnostic médical. Chute brutale ou par plaques : consultez un dermatologue.",
+"Cosmetic guidance, not a medical diagnosis. Sudden or patchy hair loss, pain or severe redness: see a dermatologist.":"Conseil cosmétique, pas un diagnostic médical. Chute brutale ou par plaques, douleur ou fortes rougeurs : consultez un dermatologue.",
+"Density 84":"Densité 84","pH 5.2":"pH 5,2","Keratin intact":"Kératine intacte","2 flakes":"2 pellicules",
+"Who is this check for?":"Pour qui est ce test ?","What bothers you most?":"Qu'est-ce qui vous gêne le plus ?","How does your scalp usually feel?":"Comment est votre cuir chevelu au quotidien ?","Colouring, bleaching or daily heat styling?":"Coloration, décoloration ou lissage quotidien ?",
+"Women":"Femme","Men":"Homme","Hair fall":"Chute de cheveux","Dandruff & itching":"Pellicules et démangeaisons","Oily scalp":"Cuir chevelu gras","Dull, breaking hair":"Cheveux ternes et cassants",
+"Calm":"Calme","Itchy":"Il me démange","Sensitive, reactive":"Sensible, réactif","Greasy within a day":"Gras en une journée","Never":"Jamais","Sometimes":"Parfois","Often":"Souvent",
+"Crown":"Sommet du crâne","Centre parting":"Raie centrale","Temples":"Tempes",
+"Phone 15 cm above the top of your head, flash on. Yes, photographing your own crown feels weird. Everyone does it.":"Téléphone à 15 cm au-dessus de la tête, flash activé. Oui, photographier le sommet de son crâne, c'est bizarre. Tout le monde le fait.",
+"Part your hair in the middle, frame the line of scalp.":"Faites une raie au milieu et cadrez la ligne de cuir chevelu.","Pull your hair back and face the camera.":"Tirez vos cheveux en arrière, face à la caméra.",
+"Take or upload a photo":"Prendre ou importer une photo","Use a sample photo":"Utiliser une photo d'exemple","Next photo":"Photo suivante","Continue to the home test":"Passer au test maison","Retake":"Reprendre",
+"Find the cause, not just the symptom":"Trouver la cause, pas seulement le symptôme","A photo can't tell broken hair from hair shed at the root, or why dandruff keeps coming back. Two simple tests can.":"Une photo ne distingue pas un cheveu cassé d'un cheveu tombé depuis la racine, ni pourquoi les pellicules reviennent. Deux tests simples, si.",
+"In your kit":"Dans votre kit","Keratin vial":"Flacon kératine","pH strip":"Bandelette pH","Calibration card":"Carte d'étalonnage",
+"€4.90 · delivered at home in under a week, or picked up at the pharmacy. Fully refunded as a €4.90 Vichy Dercos voucher on your first routine purchase.":"4,90 € · livré chez vous en moins d'une semaine, ou à retirer en pharmacie. Entièrement remboursé en bon d'achat Vichy Dercos de 4,90 € sur votre premier achat de routine.",
+"I have my kit":"J'ai mon kit","No kit yet — see my photo-only results":"Pas encore de kit — voir mes résultats photo",
+"Is your hair fibre losing keratin?":"Votre fibre perd-elle de la kératine ?","Cut 2–3 hairs, about 2 cm long.":"Coupez 2 à 3 cheveux d'environ 2 cm.","Drop them in the vial, close it and shake for 10 seconds.":"Mettez-les dans le flacon, fermez et secouez 10 secondes.",
+"Wait 3 minutes. Damaged fibre releases protein and the liquid turns from beige to violet.":"Attendez 3 minutes. Une fibre abîmée libère des protéines et le liquide passe du beige au violet.",
+"Three minutes: just enough time to pick a playlist.":"Trois minutes : juste le temps de choisir une playlist.","Start the 3-minute timer":"Lancer le minuteur de 3 minutes","Timer running…":"Minuteur en cours…","Skip the wait (demo)":"Passer l'attente (démo)",
+"What is your scalp pH?":"Quel est le pH de votre cuir chevelu ?","Part your hair in the middle.":"Faites une raie au milieu.","Press the strip's coloured pad on the scalp for 10 seconds.":"Appuyez la zone colorée de la bandelette sur le cuir chevelu pendant 10 secondes.","Lay the strip and the vial on the calibration card.":"Posez la bandelette et le flacon sur la carte d'étalonnage.",
+"A healthy scalp sits around pH 4.5–5.5. Above that, the yeast behind dandruff thrives.":"Un cuir chevelu sain a un pH d'environ 4,5–5,5. Au-dessus, la levure responsable des pellicules prolifère.",
+"Both tests are on the card":"Les deux tests sont sur la carte","Photograph the card":"Photographier la carte","One photo reads both tests":"Une seule photo lit les deux tests",
+"The AI uses the white and grey squares to cancel your bathroom lighting before reading the colours.":"L'IA utilise les carrés blanc et gris pour annuler l'éclairage de votre salle de bain avant de lire les couleurs.",
+"Card, vial and strip in the frame":"Carte, flacon et bandelette dans le cadre","Use a sample card photo":"Utiliser une photo d'exemple","See my results":"Voir mes résultats",
+"Tap the WHITE square":"Touchez le carré BLANC","Tap the liquid in the vial":"Touchez le liquide du flacon","Tap the pH strip's pad":"Touchez la zone colorée de la bandelette","White":"Blanc","Vial":"Flacon",
+"Read by the AI":"Lu par l'IA","Beige: fibre intact":"Beige : fibre intacte","Light violet: some keratin loss":"Violet clair : légère perte de kératine","Violet: keratin is leaking":"Violet : la kératine s'échappe",
+"In the healthy range":"Dans la norme","Too alkaline":"Trop alcalin","Too acidic":"Trop acide","vial":"flacon","strip":"bandelette","before correction.":"avant correction.",
+"Putting it":"On assemble","together…":"le tout…","Three kinds of evidence, one routine.":"Trois sources de preuves, une routine.",
+"Counting hairs (not one by one, promise)…":"On compte les cheveux (pas un par un, promis)…","Correcting your bathroom lighting…":"On corrige l'éclairage de votre salle de bain…","Asking the vial how it feels…":"On demande au flacon comment il va…","Matching your Vichy Dercos routine…":"On choisit votre routine Vichy Dercos…",
+"Photos":"Photos","Density and flakes on 3 zones":"Densité et pellicules sur 3 zones","Home test":"Test maison","Keratin and pH, light-corrected":"Kératine et pH, lumière corrigée","Skipped — photo-only results":"Passé — résultats photo seulement","Your answers":"Vos réponses","Concern, scalp feel, habits":"Problème, sensations, habitudes",
+"Baseline":"Point de départ","SCORE":"SCORE","Density":"Densité","Flakes":"Pellicules","Scalp pH":"pH du cuir chevelu","Fibre strength":"Résistance de la fibre","Fibre":"Fibre","Overall":"Global",
+"Great":"Excellent","Good":"Bon","Watch":"À surveiller","Priority":"Prioritaire","= stable":"= stable","—":"—","Needs the home kit":"Nécessite le kit maison",
+"Photo AI · 3 zones":"IA photo · 3 zones","Photo AI · parting":"IA photo · raie","Kit · pH strip":"Kit · bandelette pH","Kit · keratin vial":"Kit · flacon kératine",
+"What we found · the cause":"Ce qu'on a trouvé · la cause","Also found":"Également","What we found":"Ce qu'on a trouvé",
+"A balanced scalp":"Un cuir chevelu équilibré","Balanced scalp":"Cuir chevelu équilibré","Thinning plus fragile fibre":"Densité en baisse et fibre fragile","Lower density at the crown":"Densité plus faible au sommet","Breakage, not true hair loss":"De la casse, pas une vraie chute",
+"Weakened keratin":"Kératine affaiblie","Alkaline scalp feeding the flakes":"Un cuir chevelu alcalin qui nourrit les pellicules","Visible flakes":"Pellicules visibles","Scalp pH out of balance":"pH du cuir chevelu déséquilibré","Excess sebum":"Excès de sébum","Reactive scalp":"Cuir chevelu réactif",
+"Fewer hairs at the root, and the hairs you have are losing keratin. Two causes, two actions.":"Moins de cheveux à la racine, et ceux qui restent perdent leur kératine. Deux causes, deux actions.",
+"The fibre itself is strong, so this is not breakage: the hair is shed from the root. That is what Aminexil targets.":"La fibre est solide, donc ce n'est pas de la casse : le cheveu tombe depuis la racine. C'est exactement la cible d'Aminexil.",
+"The photos show more scalp than expected. Add the kit to tell true hair fall from breakage.":"Les photos montrent plus de cuir chevelu que prévu. Ajoutez le kit pour distinguer une vraie chute de la casse.",
+"Your density is normal, but the vial shows the fibre is leaking keratin. The hair you find in the brush is broken, not shed: an anti-hair-loss cure would not help. Repair the fibre instead.":"Votre densité est normale, mais le flacon montre que la fibre perd sa kératine. Les cheveux dans votre brosse sont cassés, pas tombés : une cure anti-chute ne servirait à rien. Il faut réparer la fibre.",
+"The hair fibre is porous and loses protein, which leads to dullness and breakage.":"La fibre est poreuse et perd ses protéines, d'où des cheveux ternes et cassants.",
+"Your scalp pH is above the healthy 4.5–5.5 range. An alkaline scalp lets the yeast behind dandruff (Malassezia) thrive, so the flakes come back.":"Le pH de votre cuir chevelu dépasse la norme de 4,5–5,5. Un cuir chevelu alcalin laisse proliférer la levure des pellicules (Malassezia) : elles reviennent sans cesse.",
+"Your pH is balanced, so the flaking looks linked to a dry or reactive scalp rather than to dandruff yeast.":"Votre pH est équilibré : les squames semblent liées à un cuir chevelu sec ou réactif plutôt qu'à la levure des pellicules.",
+"Flakes are visible on the parting. Add the kit to check whether your scalp pH is the cause.":"Des pellicules sont visibles sur la raie. Ajoutez le kit pour vérifier si le pH en est la cause.",
+"No flakes yet, but an alkaline scalp is the first step towards them.":"Pas encore de pellicules, mais un cuir chevelu alcalin en est la première étape.",
+"You told us your roots get greasy fast.":"Vous nous avez dit que vos racines graissent vite.","You told us your scalp reacts easily: we keep the routine gentle.":"Vous nous avez dit que votre cuir chevelu réagit facilement : on garde une routine douce.","From your answers":"D'après vos réponses",
+"All four readings are in a healthy range":"Les quatre mesures sont dans la norme","Your routine worked. Switch to maintenance and keep checking monthly.":"Votre routine a marché. Passez en entretien et continuez à tester chaque mois.","Keep a gentle routine and check again in a month.":"Gardez une routine douce et refaites le test dans un mois.",
+"Unlock the cause":"Découvrez la cause","Photos show symptoms. The home kit tells breakage from true hair fall and checks the pH behind dandruff.":"Les photos montrent les symptômes. Le kit maison distingue la casse d'une vraie chute et mesure le pH à l'origine des pellicules.",
+"Delivered in under a week · fully refunded as a Vichy Dercos voucher on your first routine purchase.":"Livré en moins d'une semaine · entièrement remboursé en bon d'achat Vichy Dercos sur votre premier achat de routine.",
+"See my Vichy Dercos routine":"Voir ma routine Vichy Dercos","The evidence":"Les preuves",
+"Email":"E-mail","Remind me in 30 days":"Me le rappeler dans 30 jours","Get a reminder and your new kit in 30 days, and keep your progress across devices.":"Recevez un rappel et votre nouveau kit dans 30 jours, et retrouvez votre suivi sur tous vos appareils.",
+"I agree that Vichy (L'Oréal) stores my scalp check results to send my reminders. I can unsubscribe and delete my data at any time (GDPR).":"J'accepte que Vichy (L'Oréal) conserve les résultats de mon scalp check pour m'envoyer mes rappels. Je peux me désinscrire et supprimer mes données à tout moment (RGPD).",
+"Please enter a valid email address.":"Veuillez saisir une adresse e-mail valide.","Please tick the consent box to receive reminders.":"Veuillez cocher la case de consentement pour recevoir les rappels.","Reminder set ✓":"Rappel programmé ✓","We'll email":"Nous écrirons à",
+"Your Vichy Dercos routine":"Votre routine Vichy Dercos","VICHY DERCOS":"VICHY DERCOS","Buy on vichy.fr ↗":"Acheter sur vichy.fr ↗","Routine total":"Total de la routine","Show to my pharmacist":"Montrer à mon pharmacien",
+"Indicative pharmacy prices. One shampoo at a time; treatments only where a reading calls for them.":"Prix indicatifs en pharmacie. Un seul shampooing à la fois ; des soins seulement quand une mesure le justifie.",
+"Same 3 photos and a new kit in 30 days. We'll compare and adjust the routine — or move you to maintenance when your scalp is back in range.":"Les 3 mêmes photos et un nouveau kit dans 30 jours. On compare et on ajuste la routine — ou on passe en entretien quand votre cuir chevelu est revenu dans la norme.",
+"Your progress":"Votre progression","Your baseline is set. Come back in 30 days to see what changed.":"Votre point de départ est enregistré. Revenez dans 30 jours pour voir ce qui a changé.","Redo the photos and the kit. The comparison appears here.":"Refaites les photos et le kit. La comparaison apparaîtra ici.",
+"Do the next check now (demo)":"Faire le prochain test maintenant (démo)","See a 3-month example":"Voir un exemple sur 3 mois","Month 0 vs now":"Mois 0 vs aujourd'hui","Reading":"Mesure","Change":"Évolution","Centre parting · before / after":"Raie centrale · avant / après","How the routine changed":"Comment la routine a évolué","Do this month's check":"Faire le test du mois",
+"Report":"Bilan","Routine":"Routine","Progress":"Suivi","Menu":"Menu","New monthly check":"Nouveau test mensuel","Start over (delete my data)":"Recommencer (supprimer mes données)",
+"For your pharmacist":"Pour votre pharmacien","Scan or show this screen at the counter.":"Montrez cet écran au comptoir.","Done":"Terminé",
+"Demo: reminder scheduled — no email is actually sent":"Démo : rappel programmé — aucun e-mail n'est réellement envoyé","Demo: kit ordered — your €4.90 comes back as a Dercos voucher":"Démo : kit commandé — vos 4,90 € reviennent en bon d'achat Dercos","Could not read that image":"Impossible de lire cette image",
+"Upside: fewer trips to the hairdresser. Downside: we'd rather send you back there. Let's fix it.":"Le bon côté : moins de passages chez le coiffeur. Le mauvais : on préférerait vous y renvoyer. On s'en occupe.",
+"Your hair is fighting on two fronts. Good thing we brought two products.":"Vos cheveux se battent sur deux fronts. Heureusement, on a apporté deux produits.",
+"Good news: your hair isn't leaving you. It's just":"Bonne nouvelle : vos cheveux ne vous quittent pas. Ils font juste","breaking up":"une crise de casse",". Much easier to fix.":". Bien plus facile à réparer.",
+"Your hair has been through a lot (hello, straightener). Time for some repair.":"Vos cheveux en ont vu de toutes les couleurs (coucou le lisseur). Place à la réparation.",
+"Washing once a month? Kidding. Dandruff isn't about hygiene, it's your":"Un shampooing par mois ? On rigole. Les pellicules, ce n'est pas une question d'hygiène, c'est le","scalp pH":"pH de votre cuir chevelu",
+"Snowing already? Those flakes aren't seasonal.":"Il neige déjà ? Ces flocons-là ne sont pas de saison.","Your scalp is a little too":"Votre cuir chevelu est un peu trop","basic":"basique",". Chemically speaking.":". Chimiquement parlant.",
+"Your roots could dress a salad. Let's calm them down.":"Vos racines pourraient assaisonner une salade. On les calme.","Your scalp is a bit of a drama queen. We'll keep things gentle.":"Votre cuir chevelu est un peu drama queen. On reste tout en douceur.",
+"Honestly? Your scalp is doing better than most of us on a Monday.":"Honnêtement ? Votre cuir chevelu va mieux que la plupart d'entre nous un lundi matin.","a lot":"beaucoup","busier.":"plus de travail.",
+/* products */
+"Aminexil Clinical 5 · Women":"Aminexil Clinical 5 · Femmes","Aminexil Clinical 5 · Men":"Aminexil Clinical 5 · Hommes","Anti-hair-loss treatment · 21 monodoses":"Cure anti-chute · 21 monodoses","One monodose a day on dry scalp, 6-week course.":"Une monodose par jour sur cuir chevelu sec, cure de 6 semaines.",
+"Energising Shampoo":"Shampooing Énergisant Anti-chute","Hair-fall prone hair · 200 ml":"Cheveux sujets à la chute · 200 ml","At every wash, leave on 1 minute.":"À chaque lavage, laisser poser 1 minute.",
+"Collagen 17 Filler Pre-Shampoo":"Pré-Shampooing Collagen 17 Filler","Ultra-repairing treatment · 150 ml":"Soin ultra-réparateur · 150 ml","On wet hair before shampoo, leave 5 minutes.":"Sur cheveux mouillés avant le shampooing, laisser poser 5 minutes.",
+"Collagen 17 Filler Shampoo":"Shampooing Collagen 17 Filler","Weakened, breaking hair · 200 ml":"Cheveux fragilisés et cassants · 200 ml","At every wash, after the pre-shampoo.":"À chaque lavage, après le pré-shampooing.",
+"Anti-Dandruff DS Shampoo":"Shampooing Anti-pelliculaire DS","Normal to oily hair · 200 ml":"Cheveux normaux à gras · 200 ml","Dry hair · 200 ml":"Cheveux secs · 200 ml","3 times a week for 4 weeks, leave 2 minutes.":"3 fois par semaine pendant 4 semaines, laisser poser 2 minutes.",
+"Ultra Soothing Shampoo":"Shampooing Ultra-Apaisant","Sensitive, itchy scalp · 200 ml":"Cuir chevelu sensible, démangeaisons · 200 ml","At every wash, gentle massage.":"À chaque lavage, massage doux.",
+"Sebum-Correcting Shampoo":"Shampooing Sébo-Correcteur","Sebum-correcting · 200 ml":"Régule le sébum · 200 ml","Every other wash, leave on 1 minute.":"Un lavage sur deux, laisser poser 1 minute.",
+"Mineral Soft Shampoo":"Shampooing Minéral Doux","Everyday care · 400 ml":"Usage quotidien · 400 ml","Your everyday shampoo.":"Votre shampooing du quotidien.",
+"Selenium disulfide clears the flakes and rebalances the scalp.":"Le disulfure de sélénium élimine les pellicules et rééquilibre le cuir chevelu.","Clears visible flakes on an oily scalp.":"Élimine les pellicules visibles sur un cuir chevelu gras.","Calms a dry, reactive scalp that flakes.":"Apaise un cuir chevelu sec et réactif qui desquame.",
+"Targets hair fall at the root.":"Cible la chute à la racine.","Refills the fibre where the vial showed keratin loss.":"Recharge la fibre là où le flacon a montré une perte de kératine.","Repairs the fibre at every wash.":"Répare la fibre à chaque lavage.",
+"Strengthens the anchoring of the hair at the root.":"Renforce l'ancrage du cheveu à la racine.","Energising wash for hair-fall prone hair.":"Un lavage énergisant pour les cheveux sujets à la chute.",
+"Repairs the fibre that the vial showed as damaged.":"Répare la fibre que le flacon a montrée abîmée.","Keeps rebuilding the fibre at every wash.":"Continue de reconstruire la fibre à chaque lavage.",
+"Gentle wash that respects the scalp's natural pH.":"Un lavage doux qui respecte le pH naturel du cuir chevelu.","Regulates sebum without drying the scalp.":"Régule le sébum sans dessécher le cuir chevelu.","Soothes a reactive scalp.":"Apaise un cuir chevelu réactif.",
+"Keep the shampoo that got you here: everything is back in range.":"Gardez le shampooing qui vous a amené ici : tout est revenu dans la norme.","Everything is in range: a gentle everyday shampoo is enough.":"Tout est dans la norme : un shampooing doux du quotidien suffit.",
+"PH:you@example.com":"vous@exemple.fr","AL:Back":"Retour","AL:Menu":"Menu","AL:Choose a check":"Choisir un test"
+};
+const FRL={};for(const k in FR)FRL[k.toLowerCase()]=FR[k];
+const num=x=>LANG==="fr"?String(x).replace(".",","):String(x);
+const lc=s=>{const f=FRL[s.toLowerCase()];return f?f.charAt(0).toLowerCase()+f.slice(1):s};
+const RULES=[
+[/^Density (\d+)$/,m=>`Densité ${m[1]}`],
+[/^Density (\d+) · (\d+) flakes detected$/,m=>`Densité ${m[1]} · ${m[2]} pellicules détectées`],
+[/^Density (\d+): more scalp visible on the photos$/,m=>`Densité ${m[1]} : plus de cuir chevelu visible sur les photos`],
+[/^Density (\d+): normal on all three zones$/,m=>`Densité ${m[1]} : normale sur les trois zones`],
+[/^Fibre strength (\d+): (?:the keratin )?vial turned violet$/,m=>`Résistance de la fibre ${m[1]} : le flacon a viré au violet`],
+[/^Fibre strength (\d+): vial stayed beige, keratin intact$/,m=>`Résistance de la fibre ${m[1]} : le flacon est resté beige, kératine intacte`],
+[/^Fibre strength (\d+): vial turned violet, keratin is leaking$/,m=>`Résistance de la fibre ${m[1]} : le flacon a viré au violet, la kératine s'échappe`],
+[/^Flakes (\d+): flakes counted along the parting$/,m=>`Pellicules ${m[1]} : pellicules comptées le long de la raie`],
+[/^pH ([\d.]+) on the strip$/,m=>`pH ${num(m[1])} sur la bandelette`],
+[/^pH ([\d.]+): within range$/,m=>`pH ${num(m[1])} : dans la norme`],
+[/^pH ([\d.]+)$/,m=>`pH ${num(m[1])}`],
+[/^pH ([\d.]+) → ([\d.]+) · vial index ([\d.]+) → ([\d.]+)$/,m=>`pH ${num(m[1])} → ${num(m[2])} · indice du flacon ${num(m[3])} → ${num(m[4])}`],
+[/^Kit read after light correction: vial index ([\d.]+), pH ([\d.]+)\.$/,m=>`Kit lu après correction de la lumière : indice du flacon ${num(m[1])}, pH ${num(m[2])}.`],
+[/^Lighting corrected from the white square: ([+-]?\d+)% blue vs red\. Raw colours$/,m=>`Lumière corrigée grâce au carré blanc : ${m[1]} % de bleu par rapport au rouge. Couleurs brutes`],
+[/^(\d+) products?, each matched to a reading(?: — for “(.+)”)?\.$/,m=>`${m[1]} produit${m[1]>1?"s":""}, chacun lié à une mesure${m[2]?` — pour « ${lc(m[2])} »`:""}.`],
+[/^BASED ON YOUR (.+) CHECK$/,m=>`D'APRÈS VOTRE TEST DU ${m[1]}`],
+[/^MONTH (\d+) CHECK · (.+)$/,m=>`TEST DU MOIS ${m[1]} · ${m[2]}`],
+[/^FIRST CHECK · (.+)$/,m=>`PREMIER TEST · ${m[1]}`],
+[/^Next check · (.+)$/,m=>`Prochain test · ${m[1]}`],
+[/^Save my results · next check on (.+)$/,m=>`Sauvegarder mes résultats · prochain test le ${m[1]}`],
+[/^on (.+) for your next check, with your new kit\.$/,m=>`le ${m[1]} pour votre prochain test, avec votre nouveau kit.`],
+[/^Score (\d+) → (\d+) since (.+)\.$/,m=>`Score ${m[1]} → ${m[2]} depuis le ${m[3]}.`],
+[/^(\d+) months? of tracking$/,m=>`${m[1]} mois de suivi`],
+[/^([▲▼]) (\d+) pts since month 0$/,m=>`${m[1]} ${m[2]} pts depuis le mois 0`],
+[/^Question (\d+) of (\d+)$/,m=>`Question ${m[1]} sur ${m[2]}`],
+[/^Photo (\d+) of (\d+)$/,m=>`Photo ${m[1]} sur ${m[2]}`],
+[/^Test (\d) of 2 · Keratin vial$/,m=>`Test ${m[1]} sur 2 · Flacon kératine`],
+[/^Test (\d) of 2 · pH strip$/,m=>`Test ${m[1]} sur 2 · Bandelette pH`],
+[/^Step 3 · Home test kit$/,()=>`Étape 3 · Kit de test maison`],
+[/^Align the (.+) inside the frame$/,m=>`Cadrez ${({"crown":"le sommet du crâne","centre parting":"la raie centrale","temples":"les tempes"})[m[1]]||m[1]} dans le cadre`],
+[/^(Men|Women) · ([^·]+?)(?: · (.+))?$/,m=>`${m[1]==="Men"?"Homme":"Femme"} · ${lc(m[2])}${m[3]?" · "+m[3]:""}`],
+[/^Scores: (.+)$/,m=>"Scores : "+m[1].split(" · ").map(x=>{const k=x.replace(/ \d+$/,"");return (FR[k]||k)+x.slice(k.length)}).join(" · ")],
+[/^Colouring or heat styling: (.+)$/,m=>`Coloration ou lissage : ${lc(m[1])}`],
+[/^\+(\d+) points\. Your hairdresser is about to get$/,m=>`+${m[1]} points. Votre coiffeur va avoir`],
+[/^(Thomas|Léa|Sam), (\d+)$/,m=>`${m[1]}, ${m[2]} ans`],
+[/^Get the home kit · €([\d.]+)$/,m=>`Recevoir le kit maison · ${num(Number(m[1]).toFixed(2))} €`],
+[/^€(\d+)\.(\d+)$/,m=>`${m[1]},${m[2]} €`],
+[/^• Dercos (.+) — (.+)$/,m=>`• Dercos ${FR[m[1]]||m[1]} — ${FR[m[2]]||m[2]}`],
+[/^(.+ \+ .+)$/,m=>{const p=m[1].split(" + ");return p.every(x=>FR[x])?p.map(x=>FR[x]).join(" + "):null}]
+];
+function tr(s){if(LANG!=="fr")return s;const k=s.trim();if(!k)return s;let o=FR[k];if(o==null)for(const [re,f] of RULES){const m=k.match(re);if(m){const r=f(m);if(r!=null){o=r;break}}}
+ return o==null?s:s.replace(k,o)}
+function translate(root){if(LANG!=="fr"||!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const list=[];while(n=w.nextNode()){const p=n.parentElement;if(p&&!p.closest("script,style,svg"))list.push(n)}
+ list.forEach(n=>{const v=tr(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
+ root.querySelectorAll("[placeholder]").forEach(e=>{const v=FR["PH:"+e.placeholder];if(v)e.placeholder=v});
+ root.querySelectorAll("[aria-label]").forEach(e=>{const v=FR["AL:"+e.getAttribute("aria-label")];if(v)e.setAttribute("aria-label",v)})}
+
+/* ---------- content ---------- */
+const AXES=[
+ {id:"density",name:"Density",t:"--t1",i:"--i1",b:"--b1",from:"Photo AI · 3 zones"},
+ {id:"flakes",name:"Flakes",t:"--t2",i:"--i2",b:"--b2",from:"Photo AI · parting"},
+ {id:"ph",name:"Scalp pH",t:"--t3",i:"--i3",b:"--b3",from:"Kit · pH strip",kit:1},
+ {id:"fibre",name:"Fibre strength",t:"--t4",i:"--i4",b:"--b4",from:"Kit · keratin vial",kit:1}
+];
+const Q=[
+ {id:"who",t:"Who is this check for?",o:["Women","Men"]},
+ {id:"concern",t:"What bothers you most?",o:["Hair fall","Dandruff & itching","Oily scalp","Dull, breaking hair"]},
+ {id:"feel",t:"How does your scalp usually feel?",o:["Calm","Itchy","Sensitive, reactive","Greasy within a day"]},
+ {id:"treat",t:"Colouring, bleaching or daily heat styling?",o:["Never","Sometimes","Often"]}
+];
+const ANGLES=[
+ {id:"crown",title:"Crown",hint:"Phone 15 cm above the top of your head, flash on. Yes, photographing your own crown feels weird. Everyone does it.",shape:"circle"},
+ {id:"parting",title:"Centre parting",hint:"Part your hair in the middle, frame the line of scalp.",shape:"rect"},
+ {id:"temples",title:"Temples",hint:"Pull your hair back and face the camera.",shape:"rect"}
+];
+/* Vichy Dercos range only. Indicative French pharmacy prices. */
+const P={
+ amxW:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/anti-chute/dercos-aminexil-clinical5-femme",name:"Aminexil Clinical 5 · Women",sub:"Anti-hair-loss treatment · 21 monodoses",price:49.9,kind:"treatment",col:"#F3DACB",use:"One monodose a day on dry scalp, 6-week course."},
+ amxM:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/anti-chute/dercos-aminexil-clinical5-homme",name:"Aminexil Clinical 5 · Men",sub:"Anti-hair-loss treatment · 21 monodoses",price:49.9,kind:"treatment",col:"#D9E3EC",use:"One monodose a day on dry scalp, 6-week course."},
+ energy:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/anti-chute/dercos-shampooing-energisant",name:"Energising Shampoo",sub:"Hair-fall prone hair · 200 ml",price:13.9,kind:"shampoo",col:"#F6E3B8",use:"At every wash, leave on 1 minute."},
+ c17pre:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/traitements-capillaires/chute-des-cheveux/collagen-17-treatment",name:"Collagen 17 Filler Pre-Shampoo",sub:"Ultra-repairing treatment · 150 ml",price:20.9,kind:"treatment",col:"#E4DAF1",use:"On wet hair before shampoo, leave 5 minutes."},
+ c17sh:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/shampooings/chute-des-cheveux/collagen-17-shampoo",name:"Collagen 17 Filler Shampoo",sub:"Weakened, breaking hair · 200 ml",price:16.9,kind:"shampoo",col:"#EDE6F6",use:"At every wash, after the pre-shampoo."},
+ dsOily:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/anti-pelliculaire/dercos-anti-pelliculaire-ds-cheveux-normaux-a-gras",name:"Anti-Dandruff DS Shampoo",sub:"Normal to oily hair · 200 ml",price:14.9,kind:"shampoo",col:"#DDEBD3",use:"3 times a week for 4 weeks, leave 2 minutes."},
+ dsDry:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/anti-pelliculaire/dercos-anti-pelliculaire-ds-pour-cheveux-secs",name:"Anti-Dandruff DS Shampoo",sub:"Dry hair · 200 ml",price:14.9,kind:"shampoo",col:"#E7EFD9",use:"3 times a week for 4 weeks, leave 2 minutes."},
+ sooth:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/shampooings/demangeaisons-du-cuir-chevelu/dercos-technique-shampooing-ultra-apaisant-cuirs-chevelus-sensibles-et-cheveux-normaux-a-gras",name:"Ultra Soothing Shampoo",sub:"Sensitive, itchy scalp · 200 ml",price:13.5,kind:"shampoo",col:"#F3DCD6",use:"At every wash, gentle massage."},
+ oil:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/shampooings/demangeaisons-du-cuir-chevelu/shampooing-sebo-correcteur",name:"Sebum-Correcting Shampoo",sub:"Sebum-correcting · 200 ml",price:14.5,kind:"shampoo",col:"#EFE3CF",use:"Every other wash, leave on 1 minute."},
+ mineral:{url:"https://www.vichy.fr/tous-les-produits/soins-capillaires/shampooings/dercos-mineral-doux-shampooing-doux-fortifiant",name:"Mineral Soft Shampoo",sub:"Everyday care · 400 ml",price:12.9,kind:"shampoo",col:"#E7EFEA",use:"Your everyday shampoo."}
+};
+
+/* ---------- state ---------- */
+const KEY="dercos.scalpcheck.v1";
+let S=load(), UI={view:S.checks.length?"app":"home",tab:"report",flow:null,metric:"overall"};
+function blank(){return{answers:null,checks:[],profile:null,email:null}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.checks))return s}catch(e){}return blank()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){try{S.checks.forEach((c,i)=>{if(i&&i<S.checks.length-1){c.photos={};c.card=null}});localStorage.setItem(KEY,JSON.stringify(S))}catch(e2){}}}
+const last=()=>S.checks[S.checks.length-1], first=()=>S.checks[0];
+const cur=()=>S.checks[UI.sel!=null&&S.checks[UI.sel]?UI.sel:S.checks.length-1];
+
+/* ---------- scoring ---------- */
+const level=v=>v>=80?"Great":v>=62?"Good":v>=42?"Watch":"Priority";
+const phScore=ph=>Math.round(clamp(100-Math.max(0,ph-5.5)*42-Math.max(0,4.5-ph)*30,8,100));
+const fibreScore=k=>Math.round(clamp(100-k*85,8,100));
+const flakeScore=n=>Math.round(clamp(100-interp(n,[0,6,20,45,80],[0,.4,1.5,2.6,3.6])*22,8,100));
+function interp(v,xs,ys){if(v<=xs[0])return ys[0];for(let i=1;i<xs.length;i++)if(v<=xs[i])return ys[i-1]+(ys[i]-ys[i-1])*(v-xs[i-1])/(xs[i]-xs[i-1]);return ys[ys.length-1]}
+function scoresOf(m,kit){const s={density:Math.round(clamp(m.density,8,100)),flakes:flakeScore(m.flakes)};
+ if(kit){s.ph=phScore(kit.ph);s.fibre=fibreScore(kit.k)}
+ const v=Object.values(s);return{s,overall:Math.round(v.reduce((a,b)=>a+b,0)/v.length)}}
+
+/* Root-cause reasoning: photo (symptom) + kit (cause) + answers (context) */
+function causes(c){
+ const s=c.scores.s,a=c.answers,kit=!!c.kit,out=[];
+ const fallC=a.concern==="Hair fall",fibreLow=kit&&s.fibre<62,densLow=s.density<62;
+ if(densLow&&fibreLow)out.push({id:"mixed",ax:"density",t:"Thinning plus fragile fibre",d:"Fewer hairs at the root, and the hairs you have are losing keratin. Two causes, two actions.",ev:[`Density ${s.density}: more scalp visible on the photos`,`Fibre strength ${s.fibre}: the keratin vial turned violet`]});
+ else if(densLow)out.push({id:"root",ax:"density",t:kit?"Hair fall from the root":"Lower density at the crown",d:kit?"The fibre itself is strong, so this is not breakage: the hair is shed from the root. That is what Aminexil targets.":"The photos show more scalp than expected. Add the kit to tell true hair fall from breakage.",ev:[`Density ${s.density}: more scalp visible on the photos`].concat(kit?[`Fibre strength ${s.fibre}: vial stayed beige, keratin intact`]:[])});
+ else if(fibreLow&&fallC)out.push({id:"breakage",ax:"fibre",t:"Breakage, not true hair loss",d:"Your density is normal, but the vial shows the fibre is leaking keratin. The hair you find in the brush is broken, not shed: an anti-hair-loss cure would not help. Repair the fibre instead.",ev:[`Density ${s.density}: normal on all three zones`,`Fibre strength ${s.fibre}: vial turned violet, keratin is leaking`]});
+ else if(fibreLow)out.push({id:"fibre",ax:"fibre",t:"Weakened keratin",d:"The hair fibre is porous and loses protein, which leads to dullness and breakage.",ev:[`Fibre strength ${s.fibre}: vial turned violet`].concat(a.treat!=="Never"?[`Colouring or heat styling: ${a.treat.toLowerCase()}`]:[])});
+ if(s.flakes<62&&kit&&s.ph<62)out.push({id:"alkaline",ax:"flakes",t:"Alkaline scalp feeding the flakes",d:"Your scalp pH is above the healthy 4.5–5.5 range. An alkaline scalp lets the yeast behind dandruff (Malassezia) thrive, so the flakes come back.",ev:[`Flakes ${s.flakes}: flakes counted along the parting`,`pH ${c.kit.ph.toFixed(1)} on the strip`]});
+ else if(s.flakes<62)out.push({id:"flakes",ax:"flakes",t:"Visible flakes",d:kit?"Your pH is balanced, so the flaking looks linked to a dry or reactive scalp rather than to dandruff yeast.":"Flakes are visible on the parting. Add the kit to check whether your scalp pH is the cause.",ev:[`Flakes ${s.flakes}: flakes counted along the parting`].concat(kit?[`pH ${c.kit.ph.toFixed(1)}: within range`]:[])});
+ else if(kit&&s.ph<62)out.push({id:"ph",ax:"ph",t:"Scalp pH out of balance",d:"No flakes yet, but an alkaline scalp is the first step towards them.",ev:[`pH ${c.kit.ph.toFixed(1)} on the strip`]});
+ if(a.feel==="Greasy within a day"||a.concern==="Oily scalp")out.push({id:"oily",t:"Excess sebum",d:"You told us your roots get greasy fast.",ev:["From your answers"]});
+ if(a.feel==="Sensitive, reactive"&&!out.some(x=>x.id==="alkaline"))out.push({id:"reactive",t:"Reactive scalp",d:"You told us your scalp reacts easily: we keep the routine gentle.",ev:["From your answers"]});
+ return out;
+}
+/* Causes → Dercos routine. One shampoo max, up to two treatments. */
+function routine(c){
+ const a=c.answers,men=a.who==="Men",cs=causes(c),ids=cs.map(x=>x.id),out=[];
+ const add=(id,why)=>{if(out.some(x=>x.id===id))return;const k=P[id].kind;if(k==="shampoo"&&out.some(x=>P[x.id].kind==="shampoo"))return;if(k==="treatment"&&out.filter(x=>P[x.id].kind==="treatment").length>=2)return;out.push({id,why})};
+ const amx=men?"amxM":"amxW";
+ if(ids.includes("alkaline"))add((a.feel==="Calm"||a.feel==="Sensitive, reactive")?"dsDry":"dsOily","Selenium disulfide clears the flakes and rebalances the scalp.");
+ if(ids.includes("flakes"))add(a.feel==="Greasy within a day"?"dsOily":"sooth",a.feel==="Greasy within a day"?"Clears visible flakes on an oily scalp.":"Calms a dry, reactive scalp that flakes.");
+ if(ids.includes("mixed")){add(amx,"Targets hair fall at the root.");add("c17pre","Refills the fibre where the vial showed keratin loss.");add("c17sh","Repairs the fibre at every wash.")}
+ if(ids.includes("root")){add(amx,"Strengthens the anchoring of the hair at the root.");add("energy","Energising wash for hair-fall prone hair.")}
+ if(ids.includes("breakage")||ids.includes("fibre")){add("c17pre","Repairs the fibre that the vial showed as damaged.");add("c17sh","Keeps rebuilding the fibre at every wash.")}
+ if(ids.includes("ph"))add("sooth","Gentle wash that respects the scalp's natural pH.");
+ if(ids.includes("oily"))add("oil","Regulates sebum without drying the scalp.");
+ if(ids.includes("reactive"))add("sooth","Soothes a reactive scalp.");
+ if(!out.length){ /* balanced: maintenance, coherent with history */
+  const prev=(S.checks.length>1&&c!==first())?routine(first()).map(x=>x.id):[];const sh=prev.find(id=>P[id].kind==="shampoo");
+  add(sh||"mineral",sh?"Keep the shampoo that got you here: everything is back in range.":"Everything is in range: a gentle everyday shampoo is enough.");
+ }
+ return out;
+}
+
+/* ---------- image tools ---------- */
+function rng(seed){let s=seed;return()=>{s=Math.sin(s)*10000;return s-Math.floor(s)}}
+function hex(h){const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+const PH_SCALE=[[4.5,"#E9A23B"],[5.0,"#E8C547"],[5.5,"#C9CB4A"],[6.0,"#9BC25A"],[6.5,"#5DB38A"],[7.0,"#3E9C9C"],[7.5,"#2F7FA6"]];
+const BEIGE=[232,217,181],VIOLET=[107,76,154];
+function phColor(v){for(let i=1;i<PH_SCALE.length;i++)if(v<=PH_SCALE[i][0]){const t=clamp((v-PH_SCALE[i-1][0])/.5,0,1),a=hex(PH_SCALE[i-1][1]),b=hex(PH_SCALE[i][1]);return a.map((c,k)=>Math.round(c+(b[k]-c)*t))}return hex(PH_SCALE[PH_SCALE.length-1][1])}
+const rgbs=a=>`rgb(${a.map(Math.round).join(",")})`;
+function vialColor(k){return BEIGE.map((c,i)=>c+(VIOLET[i]-c)*k)}
+function readPh(rgb){let best=4.5,bd=1e9;for(let v=4.5;v<=7.51;v+=.05){const c=phColor(v),d=(c[0]-rgb[0])**2+(c[1]-rgb[1])**2+(c[2]-rgb[2])**2;if(d<bd){bd=d;best=v}}return Math.round(best*10)/10}
+function readK(rgb){const d=VIOLET.map((v,i)=>v-BEIGE[i]),p=rgb.map((v,i)=>v-BEIGE[i]);return clamp(p.reduce((a,v,i)=>a+v*d[i],0)/d.reduce((a,v)=>a+v*v,0),0,1)}
+function thumb(src,w=420){const t=document.createElement("canvas");t.width=w;t.height=Math.round(w*src.height/src.width);t.getContext("2d").drawImage(src,0,0,t.width,t.height);return t.toDataURL("image/jpeg",.72)}
+function pixels(src,size){const w=size,h=Math.round(size*src.height/src.width),c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(src,0,0,w,h);return{d:x.getImageData(0,0,w,h).data,w,h}}
+const isSkin=(r,g,b)=>r>g&&g>b&&r-b>30&&r>120;
+/* Simple on-device reading of a real photo (concept demo; production = trained segmentation model) */
+function analyzeReal(id,img){
+ const p=pixels(img,220);let skin=0,tot=0,specks=0;
+ const y0=Math.round(p.h*(id==="temples"?0:.15)),y1=Math.round(p.h*(id==="temples"?.55:.85)),x0=Math.round(p.w*(id==="parting"?.3:.2)),x1=Math.round(p.w*(id==="parting"?.7:.8));
+ for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const j=(y*p.w+x)*4,r=p.d[j],g=p.d[j+1],b=p.d[j+2];tot++;if(isSkin(r,g,b))skin++;const mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx>225&&mx-mn<28)specks++}
+ const ratio=skin/Math.max(1,tot);
+ const density=id==="temples"?interp(ratio,[.15,.25,.4,.55],[94,80,52,28]):id==="parting"?interp(ratio,[.04,.09,.18,.3],[94,78,48,24]):interp(ratio,[.03,.08,.16,.26],[94,76,44,22]);
+ return{density,flakes:Math.min(90,Math.round(specks/6))};
+}
+/* Sample photos drawn from a profile's true values */
+function drawSample(id,v,seed){
+ const c=document.createElement("canvas"),x=c.getContext("2d"),r=rng(seed);
+ const strands=(n,w,h,cx,cy,rad)=>{for(let i=0;i<n;i++){x.strokeStyle=`rgba(${55+r()*40},${40+r()*25},${30+r()*20},.92)`;x.lineWidth=1+r()*2;x.beginPath();
+  if(rad){const a=r()*7,d0=r()*40,L=200+r()*300;x.moveTo(cx+Math.cos(a)*d0,cy+Math.sin(a)*d0);x.quadraticCurveTo(cx+Math.cos(a+.5)*L*.5,cy+Math.sin(a+.5)*L*.5,cx+Math.cos(a+.8)*L,cy+Math.sin(a+.8)*L)}
+  else{const sx=r()*w;x.moveTo(sx,0);x.bezierCurveTo(sx+(r()-.5)*40,h*.33,sx+(r()-.5)*40,h*.66,sx+(r()-.5)*50,h)}x.stroke()}};
+ const loss=(100-v.density)/100;
+ if(id==="crown"){c.width=600;c.height=800;x.fillStyle="#2B1F19";x.fillRect(0,0,600,800);
+  const g=x.createRadialGradient(300,400,5,300,400,40+loss*260);g.addColorStop(0,`rgba(214,176,150,${.35+loss*.6})`);g.addColorStop(1,"rgba(214,176,150,0)");x.fillStyle=g;x.fillRect(0,0,600,800);
+  strands(Math.round(900-loss*500),600,800,300,400,1)}
+ if(id==="parting"){c.width=600;c.height=800;x.fillStyle="#2B1F19";x.fillRect(0,0,600,800);strands(650,600,800);
+  const pw=10+loss*90;x.fillStyle="#D8B49A";x.beginPath();x.moveTo(300-pw/2,0);x.bezierCurveTo(292,260,310,540,300-pw/2-4,800);x.lineTo(300+pw/2+4,800);x.bezierCurveTo(316,540,300,260,300+pw/2,0);x.fill();
+  x.fillStyle="#F4EFE6";for(let i=0;i<v.flakes;i++){x.beginPath();x.ellipse(300+(r()-.5)*(pw+70),30+r()*740,1.5+r()*3.5,1+r()*2.2,r()*3,0,7);x.fill()}
+  if(v.red){x.fillStyle="rgba(200,70,60,.18)";x.fillRect(300-pw/2-10,0,pw+20,800)}}
+ if(id==="temples"){c.width=600;c.height=800;x.fillStyle="#D9B39A";x.fillRect(0,0,600,800);
+  const hy=xx=>250+25*Math.cos((xx-300)/600*Math.PI)-loss*1.6*120*(Math.exp(-(((xx-160)/85)**2))+Math.exp(-(((xx-440)/85)**2)));
+  x.fillStyle="#2B1F19";x.beginPath();x.moveTo(0,0);for(let xx=0;xx<=600;xx+=10)x.lineTo(xx,Math.max(60,hy(xx)));x.lineTo(600,0);x.fill();
+  for(let i=0;i<500;i++){const sx=r()*600,ey=Math.max(60,hy(sx));x.strokeStyle=`rgba(${55+r()*40},${40+r()*25},${30+r()*20},.9)`;x.lineWidth=1+r()*1.6;x.beginPath();x.moveTo(sx,ey);x.lineTo(sx+(r()-.5)*30,0);x.stroke()}
+  x.fillStyle="rgba(120,80,60,.25)";x.beginPath();x.ellipse(300,800,330,190,0,0,7);x.fill()}
+ return c;
+}
+/* Calibration card photo: white/grey references, keratin vial, pH strip, under warm bathroom light */
+const CARD_PTS={white:[95,105],liquid:[352,400],pad:[640,180]};
+function drawCard(kit,seed,warm=[1,.93,.78]){
+ const c=document.createElement("canvas");c.width=900;c.height=600;const x=c.getContext("2d"),r=rng(seed);
+ x.fillStyle="#7d746a";x.fillRect(0,0,900,600);
+ x.fillStyle="#FAFAFA";x.beginPath();x.roundRect(30,30,840,540,24);x.fill();
+ x.fillStyle="#FFFFFF";x.fillRect(50,55,90,100);x.fillStyle="#8A8A8A";x.fillRect(150,55,90,100);x.fillStyle="#1B1B1B";x.fillRect(250,55,90,100);
+ x.fillStyle="#333";x.font="600 18px DM Sans, Arial";x.fillText("WHITE",62,182);x.fillText("GREY 18%",152,182);x.fillText("BLACK",262,182);
+ x.font="700 20px DM Sans, Arial";x.fillText("DERCOS SCALP KIT · CALIBRATION CARD",400,90);
+ /* vial */
+ x.fillStyle="#2E3B3D";x.beginPath();x.roundRect(275,215,110,40,8);x.fill();
+ x.fillStyle="rgba(230,236,240,.9)";x.beginPath();x.roundRect(270,250,120,260,22);x.fill();
+ x.fillStyle=rgbs(vialColor(kit.k));x.beginPath();x.roundRect(280,300,100,200,18);x.fill();
+ x.strokeStyle="rgba(60,40,30,.8)";x.lineWidth=1.5;for(let i=0;i<3;i++){x.beginPath();x.moveTo(290+i*8,320+r()*20);x.bezierCurveTo(300+r()*10,380,288+r()*10,430,296+i*6,480);x.stroke()}
+ x.fillStyle="#333";x.font="600 18px DM Sans, Arial";x.fillText("1 · KERATIN VIAL",255,545);
+ /* strip */
+ x.fillStyle="#fff";x.strokeStyle="#ccc";x.lineWidth=2;x.beginPath();x.roundRect(600,130,80,380,10);x.fill();x.stroke();
+ x.fillStyle=rgbs(phColor(kit.ph));x.fillRect(605,140,70,80);
+ x.fillStyle="#333";x.fillText("2 · pH STRIP",585,545);
+ PH_SCALE.forEach(([v,col],i)=>{x.fillStyle=col;x.fillRect(730,130+i*52,46,40);x.fillStyle="#333";x.font="600 16px DM Sans, Arial";x.fillText(v.toFixed(1),786,156+i*52)});
+ /* warm bathroom light */
+ const im=x.getImageData(0,0,900,600),d=im.data;for(let i=0;i<d.length;i+=4){d[i]=clamp(d[i]*warm[0],0,255);d[i+1]=clamp(d[i+1]*warm[1],0,255);d[i+2]=clamp(d[i+2]*warm[2],0,255)}x.putImageData(im,0,0);
+ return c;
+}
+function sampleAt(canvas,px,py,rad=6){const x=canvas.getContext("2d",{willReadFrequently:true}),d=x.getImageData(Math.max(0,px-rad),Math.max(0,py-rad),rad*2,rad*2).data;let R=0,G=0,B=0,n=0;for(let i=0;i<d.length;i+=4){R+=d[i];G+=d[i+1];B+=d[i+2];n++}return[R/n,G/n,B/n]}
+function calibrate(raw){const g=raw.white.map(v=>255/Math.max(30,v)),fix=c=>c.map((v,i)=>clamp(v*g[i],0,255));const liquid=fix(raw.liquid),pad=fix(raw.pad);return{gain:g,liquid,pad,rawLiquid:raw.liquid,rawPad:raw.pad,k:Math.round(readK(liquid)*100)/100,ph:readPh(pad)}}
+
+/* ---------- demo profiles (4 monthly checks each) ---------- */
+const PROFILES={
+ thomas:{name:"Thomas, 34",tag:"Hair fall from the root",a:{who:"Men",concern:"Hair fall",feel:"Calm",treat:"Never"},m0:{density:44,flakes:6,ph:5.3,k:.12},m3:{density:76,flakes:4,ph:5.1,k:.1}},
+ lea:{name:"Léa, 29",tag:"Thinks it's hair fall — it's breakage",a:{who:"Women",concern:"Hair fall",feel:"Calm",treat:"Often"},m0:{density:82,flakes:5,ph:5.4,k:.74},m3:{density:85,flakes:4,ph:5.2,k:.26}},
+ sam:{name:"Sam, 26",tag:"Dandruff linked to scalp pH",a:{who:"Women",concern:"Dandruff & itching",feel:"Itchy",treat:"Sometimes"},m0:{density:80,flakes:58,ph:6.7,k:.3,red:1},m3:{density:82,flakes:6,ph:5.3,k:.22}}
+};
+function buildProfile(key){
+ const p=PROFILES[key],now=Date.now();S={answers:p.a,checks:[],profile:key,email:null};
+ for(let m=0;m<4;m++){const t=1-Math.pow(.55,m),lerp=k=>p.m0[k]+(p.m3[k]-p.m0[k])*(m===3?1:t/(1-Math.pow(.55,3)));
+  const v={density:lerp("density"),flakes:Math.round(lerp("flakes")),red:m<2&&p.m0.red};const kit={ph:Math.round(lerp("ph")*10)/10,k:Math.round(lerp("k")*100)/100};
+  const photos={};ANGLES.forEach((g,i)=>photos[g.id]=thumb(drawSample(g.id,v,i*11+m*7+3),m===0||m===3?420:200));
+  const cardC=drawCard(kit,m+5);const cal=calibrate({white:sampleAt(cardC,...CARD_PTS.white),liquid:sampleAt(cardC,...CARD_PTS.liquid),pad:sampleAt(cardC,...CARD_PTS.pad)});
+  const chk={month:m,date:now-(3-m)*30*DAY,answers:p.a,metrics:{density:v.density,flakes:v.flakes},kit:cal,photos,card:thumb(cardC,m===0||m===3?520:360)};
+  chk.scores=scoresOf(chk.metrics,chk.kit);S.checks.push(chk)}
+ save();UI={view:"app",tab:"report",flow:null,metric:"overall",sel:0};render();scrollTo(0,0);
+}
+
+/* ---------- flow ---------- */
+function startFlow(again){UI.flow={step:again?"photos":"q",qi:0,answers:again&&S.answers?{...S.answers}:{},ai:0,photos:{},metrics:{},kitStep:0,card:null,cal:null,taps:[]};UI.view="flow";render();scrollTo(0,0)}
+function finishFlow(){
+ const f=UI.flow,ms=Object.values(f.metrics);
+ const m={density:ms.length?ms.reduce((a,b)=>a+b.density*b.w,0)/ms.reduce((a,b)=>a+b.w,0):70,flakes:Math.round(ms.filter(x=>x.flakes!=null).reduce((a,b)=>a+b.flakes,0)/Math.max(1,ms.filter(x=>x.flakes!=null).length))};
+ const chk={month:S.checks.length,date:Date.now(),answers:f.answers,metrics:m,kit:f.cal?{...f.cal}:null,photos:f.photos,card:f.card};
+ chk.scores=scoresOf(chk.metrics,chk.kit);S.answers=f.answers;S.checks.push(chk);save();
+ UI.view="analysing";render();
+ const srcs=[...document.querySelectorAll(".src")];srcs.forEach((el,i)=>setTimeout(()=>el.classList.add("on"),350+i*450));
+ ["Correcting your bathroom lighting…","Asking the vial how it feels…","Matching your Vichy Dercos routine…"].forEach((t,i)=>setTimeout(()=>{const el=$("#cycle");if(el)el.textContent=tr(t)},600+i*550));
+ setTimeout(()=>{UI.view="app";UI.tab="report";UI.flow=null;UI.sel=null;render();scrollTo(0,0)},2300);
+}
+
+
+/* ---------- hair art ---------- */
+function hairSVG(seed,n=34,op=1){const r=rng(seed);let d="";for(let i=0;i<n;i++){const y0=-40+i*11+r()*8,c1=y0+60+r()*60,c2=y0+120+r()*80,y3=y0+150+r()*90,w=.8+r()*1.6;
+ d+=`<path d="M-20 ${y0.toFixed(1)} C 120 ${c1.toFixed(1)}, 260 ${(c2-90).toFixed(1)}, 420 ${y3.toFixed(1)}" stroke="url(#hg${seed})" stroke-width="${w.toFixed(2)}" fill="none" stroke-linecap="round" opacity="${(.35+r()*.65).toFixed(2)}"/>`}
+ return `<svg class="strands" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="opacity:${op}"><defs><linearGradient id="hg${seed}" x1="0" x2="1"><stop offset="0" stop-color="#2f6a6f" stop-opacity=".2"/><stop offset=".55" stop-color="#7fb39a"/><stop offset="1" stop-color="#D8F396" stop-opacity=".35"/></linearGradient></defs>${d}</svg>`}
+function lensSVG(){const r=rng(7);let f="";for(let i=0;i<46;i++){const x=10+r()*150,y=10+r()*150,a=-.9+r()*.5,L=22+r()*30;
+ f+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6" fill="#7a4b37" opacity=".55"/><path d="M${x.toFixed(1)} ${y.toFixed(1)} q ${(Math.cos(a)*L*.5).toFixed(1)} ${(Math.sin(a)*L*.3).toFixed(1)} ${(Math.cos(a)*L).toFixed(1)} ${(Math.sin(a)*L).toFixed(1)}" stroke="#3a2419" stroke-width="${(1.6+r()*1.2).toFixed(1)}" fill="none" stroke-linecap="round"/>`}
+ for(let i=0;i<5;i++)f+=`<ellipse cx="${(20+r()*130).toFixed(0)}" cy="${(20+r()*130).toFixed(0)}" rx="3.5" ry="2.2" fill="#fbf7ef" opacity=".9"/>`;
+ return `<svg viewBox="0 0 170 170" aria-hidden="true"><defs><radialGradient id="sk" cx=".4" cy=".35"><stop offset="0" stop-color="#ecc9ad"/><stop offset="1" stop-color="#c99778"/></radialGradient></defs><rect width="170" height="170" fill="url(#sk)"/>${f}</svg>`}
+function homeArt(){return `<div class="art">${hairSVG(3,30)}<div class="lens">${lensSVG()}</div>
+ <span class="pin" style="left:6%;top:14%"><i style="background:#E3A07F"></i>Density 84</span>
+ <span class="pin" style="right:5%;top:22%"><i style="background:#CDAE80"></i>pH 5.2</span>
+ <span class="pin" style="left:4%;bottom:16%"><i style="background:#A48FD3"></i>Keratin intact</span>
+ <span class="pin" style="right:7%;bottom:10%"><i style="background:#86BC72"></i>2 flakes</span></div>`}
+
+/* ---------- a little humour ---------- */
+function quip(c){const cs=causes(c),id=cs[0]&&cs[0].id,d=c.scores.overall-first().scores.overall;
+ if(!id)return c!==first()&&d>=8?`+${d} points. Your hairdresser is about to get <b>a lot</b> busier.`:"Honestly? Your scalp is doing better than most of us on a Monday.";
+ return {root:"Upside: fewer trips to the hairdresser. Downside: we'd rather send you back there. Let's fix it.",
+  mixed:"Your hair is fighting on two fronts. Good thing we brought two products.",
+  breakage:"Good news: your hair isn't leaving you. It's just <b>breaking up</b>. Much easier to fix.",
+  fibre:"Your hair has been through a lot (hello, straightener). Time for some repair.",
+  alkaline:"Washing once a month? Kidding. Dandruff isn't about hygiene, it's your <b>scalp pH</b>.",
+  flakes:"Snowing already? Those flakes aren't seasonal.",
+  ph:"Your scalp is a little too <b>basic</b>. Chemically speaking.",
+  oily:"Your roots could dress a salad. Let's calm them down.",
+  reactive:"Your scalp is a bit of a drama queen. We'll keep things gentle."}[id]||"";}
+/* ---------- views ---------- */
+const brand=(btn="")=>`<div class="brand"><div><b>VICHY LABORATOIRES</b><small>Scalp Check AI · Dercos range · concept demo</small></div><div class="row" style="gap:8px"><div class="lang" role="group" aria-label="Language"><button class="${LANG==="en"?"on":""}" data-lang="en">EN</button><button class="${LANG==="fr"?"on":""}" data-lang="fr">FR</button></div>${btn}</div></div>`;
+const pack=(col)=>`<div class="pack" style="background:${col}"><svg viewBox="0 0 46 84"><rect x="15" y="2" width="16" height="10" rx="2" fill="#0B252B"/><rect x="5" y="12" width="36" height="70" rx="8" fill="#fff" stroke="#0B252B" stroke-width="1.5"/><rect x="5" y="34" width="36" height="22" fill="#0B252B"/><text x="23" y="48" font-size="8" font-weight="700" fill="#D8F396" text-anchor="middle" font-family="DM Sans,Arial">DERCOS</text></svg></div>`;
+
+function vHome(){
+ return `<div class="hero">${brand()}
+ ${homeArt()}<h1 style="margin-top:4px">Vichy Scalp Check:<br><em>photo + home test.</em></h1>
+ <p class="lead">Photos show the symptoms. A 3-minute home test reveals the cause. Together, they pick the right Vichy Dercos routine — then track the change every month.</p></div>
+ <div class="wrap">
+ <div class="card steps">
+  <div class="st"><div class="num" style="background:var(--t3)">1</div><div><h3>Four quick questions</h3><div class="small muted">Your concern, your scalp, your habits. 30 seconds.</div></div></div>
+  <div class="st"><div class="num" style="background:var(--t1)">2</div><div><h3>Three guided photos</h3><div class="small muted">Crown, parting, temples. The AI reads density and flakes.</div></div></div>
+  <div class="st"><div class="num" style="background:var(--t4)">3</div><div><h3>Home test kit</h3><div class="small muted">A keratin vial and a pH strip, read by your phone on a calibration card.</div></div></div>
+ </div>
+ <button class="btn" data-act="start">Start my scalp check ${IC.arrow}</button>
+ <div class="card" style="margin-top:12px"><div class="label">Try a demo profile · 3 months of tracking</div><div class="profiles">
+ ${Object.entries(PROFILES).map(([k,p])=>`<button class="prof" data-prof="${k}"><div><b>${p.name}</b><span>${p.tag}</span></div>${IC.arrow}</button>`).join("")}
+ </div></div>
+ </div><p class="disc">Concept demonstration · cosmetic guidance, not a medical diagnosis. Sudden or patchy hair loss: see a dermatologist.</p>`;
+}
+
+function topBar(pct,backAct="back"){return `<div class="top"><button class="iconbtn" data-act="${backAct}" aria-label="Back">${IC.back}</button><div class="prog"><i style="width:${pct}%"></i></div></div>`}
+
+function vFlow(){
+ const f=UI.flow;
+ if(f.step==="q"){const q=Q[f.qi];return topBar((f.qi+1)/10*100)+`<div class="wrap"><div class="label">Question ${f.qi+1} of ${Q.length}</div><h2>${q.t}</h2><div class="opts">${q.o.map(o=>`<button class="opt ${f.answers[q.id]===o?"on":""}" data-ans="${esc(o)}">${o}</button>`).join("")}</div></div>`}
+ if(f.step==="photos"){const g=ANGLES[f.ai],ph=f.photos[g.id];
+  return topBar((4+f.ai+1)/10*100)+`<div class="wrap"><div class="label">Photo ${f.ai+1} of 3</div><h2>${g.title}</h2><p class="muted small" style="margin:0 0 12px">${g.hint}</p>
+  <div class="shot">${ph?`<img src="${ph}" alt="${g.title} photo"><span class="tag">${esc(readOut(f.metrics[g.id],g.id))}</span>`:`<div style="text-align:center;padding:20px"><div style="width:48px;margin:0 auto 8px;opacity:.8">${IC.cam}</div><div class="small" style="opacity:.8">Align the ${g.title.toLowerCase()} inside the frame</div></div><div class="guide ${g.shape==="rect"?"rect":""}"></div>`}</div>
+  <div style="display:grid;gap:10px;margin-top:12px">
+  ${ph?`<button class="btn" data-act="nextPhoto">${f.ai<2?"Next photo":"Continue to the home test"} ${IC.arrow}</button><button class="btn ghost" data-act="redo">Retake</button>`:
+  `<label class="btn dark">${IC.cam.replace("<svg",'<svg width="20" height="20"')} Take or upload a photo<input class="file" type="file" accept="image/*" capture="environment" data-file="photo"></label><button class="btn ghost" data-act="samplePhoto">Use a sample photo</button>`}
+  </div></div>`}
+ if(f.step==="kit")return vKit();
+}
+const readOut=(m,id)=>!m?"":id==="parting"?`Density ${Math.round(m.density)} · ${m.flakes} flakes detected`:`Density ${Math.round(m.density)}`;
+
+const KITSVG={vial:`<svg viewBox="0 0 44 56"><rect x="14" y="2" width="16" height="8" rx="2" fill="#2E3B3D"/><rect x="12" y="10" width="20" height="44" rx="6" fill="#E6ECF0"/><rect x="14" y="22" width="16" height="30" rx="5" fill="#E8D9B5"/></svg>`,
+ strip:`<svg viewBox="0 0 44 56"><rect x="16" y="2" width="12" height="52" rx="3" fill="#fff" stroke="#bbb"/><rect x="17" y="4" width="10" height="12" fill="#C9CB4A"/></svg>`,
+ card:`<svg viewBox="0 0 44 56"><rect x="2" y="10" width="40" height="36" rx="5" fill="#fff" stroke="#bbb"/><rect x="6" y="14" width="8" height="8" fill="#fff" stroke="#ccc"/><rect x="16" y="14" width="8" height="8" fill="#8A8A8A"/><rect x="26" y="14" width="8" height="8" fill="#1B1B1B"/></svg>`};
+let timerId=null;
+function vKit(){
+ const f=UI.flow,k=f.kitStep,pct=(7+Math.min(k,3))/10*100;
+ if(k===0)return topBar(pct)+`<div class="wrap"><div class="label">Step 3 · Home test kit</div><h2>Find the cause, not just the symptom</h2>
+ <p class="muted small">A photo can't tell broken hair from hair shed at the root, or why dandruff keeps coming back. Two simple tests can.</p>
+ <div class="card"><h3>In your kit</h3><div class="kit"><div>${KITSVG.vial}Keratin vial</div><div>${KITSVG.strip}pH strip</div><div>${KITSVG.card}Calibration card</div></div>
+ <div class="note">€4.90 · delivered at home in under a week, or picked up at the pharmacy. Fully refunded as a €4.90 Vichy Dercos voucher on your first routine purchase.</div></div>
+ <div style="display:grid;gap:10px"><button class="btn" data-act="kitNext">I have my kit ${IC.arrow}</button><button class="btn link" data-act="noKit">No kit yet — see my photo-only results</button></div></div>`;
+ if(k===1)return topBar(pct)+`<div class="wrap"><div class="label">Test 1 of 2 · Keratin vial</div><h2>Is your hair fibre losing keratin?</h2>
+ <div class="card"><ol class="how"><li>Cut 2–3 hairs, about 2 cm long.</li><li>Drop them in the vial, close it and shake for 10 seconds.</li><li>Wait 3 minutes. Damaged fibre releases protein and the liquid turns from beige to violet.</li></ol><p class="small muted" style="margin:4px 0 0">Three minutes: just enough time to pick a playlist.</p>
+ <div class="timer" id="timer">${fmtT(f.t??180)}</div>
+ <div style="display:grid;gap:8px"><button class="btn dark" data-act="timer">${f.tRun?"Timer running…":"Start the 3-minute timer"}</button><button class="btn link" data-act="kitNext">Skip the wait (demo)</button></div></div></div>`;
+ if(k===2)return topBar(pct)+`<div class="wrap"><div class="label">Test 2 of 2 · pH strip</div><h2>What is your scalp pH?</h2>
+ <div class="card"><ol class="how"><li>Part your hair in the middle.</li><li>Press the strip's coloured pad on the scalp for 10 seconds.</li><li>Lay the strip and the vial on the calibration card.</li></ol>
+ <div class="note">A healthy scalp sits around pH 4.5–5.5. Above that, the yeast behind dandruff thrives.</div></div>
+ <button class="btn" data-act="kitNext">Both tests are on the card ${IC.arrow}</button></div>`;
+ /* k===3: photograph & read */
+ const need=["white","liquid","pad"],labels={white:"Tap the WHITE square",liquid:"Tap the liquid in the vial",pad:"Tap the pH strip's pad"};
+ const next=need.find(n=>!f.taps.some(t=>t.n===n));
+ return topBar(pct)+`<div class="wrap"><div class="label">Photograph the card</div><h2>One photo reads both tests</h2>
+ <p class="muted small" style="margin:0 0 12px">The AI uses the white and grey squares to cancel your bathroom lighting before reading the colours.</p>
+ ${f.cardCanvas?`<div class="cardwrap" id="cardwrap"></div>${f.cal?"":`<p class="small" style="font-weight:600;margin:10px 0 0">${labels[next]}</p>`}`:`<div class="shot" style="aspect-ratio:3/2"><div style="text-align:center"><div style="margin:0 auto 6px;width:88px">${KITSVG.card.replace('viewBox="0 0 44 56"','viewBox="0 6 44 44" width="88" height="88"')}</div><div class="small" style="opacity:.8">Card, vial and strip in the frame</div></div><div class="guide rect"></div></div>`}
+ ${f.cal?vReadings(f.cal):""}
+ <div style="display:grid;gap:10px;margin-top:12px">
+ ${f.cal?`<button class="btn" data-act="finish">See my results ${IC.arrow}</button><button class="btn ghost" data-act="resetCard">Retake</button>`:f.cardCanvas?`<button class="btn ghost" data-act="resetCard">Retake</button>`:
+ `<label class="btn dark">${IC.cam.replace("<svg",'<svg width="20" height="20"')} Take or upload a photo<input class="file" type="file" accept="image/*" capture="environment" data-file="card"></label><button class="btn ghost" data-act="sampleCard">Use a sample card photo</button>`}
+ </div></div>`;
+}
+const fmtT=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
+function vReadings(c){
+ const corr=Math.round((c.gain[2]/c.gain[0]-1)*100);
+ return `<div class="card" style="margin-top:12px"><div class="label">Read by the AI</div>
+ <div class="read"><div class="sw" style="background:${rgbs(c.liquid)}"></div><div><b>Keratin vial</b><div class="small muted">${c.k<.35?"Beige: fibre intact":c.k<.55?"Light violet: some keratin loss":"Violet: keratin is leaking"}</div></div><div class="v">${fibreScore(c.k)}<span class="small muted">/100</span></div></div>
+ <div class="read"><div class="sw" style="background:${rgbs(c.pad)}"></div><div><b>pH strip</b><div class="small muted">${c.ph<=5.5&&c.ph>=4.5?"In the healthy range":c.ph>5.5?"Too alkaline":"Too acidic"}</div></div><div class="v">pH ${c.ph.toFixed(1)}</div></div>
+ <div class="small muted" style="margin-top:8px">Lighting corrected from the white square: ${corr>=0?"+":""}${corr}% blue vs red. Raw colours <span class="chip" style="background:${rgbs(c.rawLiquid)};color:#000">vial</span> <span class="chip" style="background:${rgbs(c.rawPad)};color:#000">strip</span> before correction.</div></div>`;
+}
+
+function vAnalysing(){
+ const c=last();
+ return `<div class="hero">${brand()}<h1>Putting it<br><em>together…</em></h1><p class="lead">Three kinds of evidence, one routine.</p></div><div class="wrap"><div class="spin"></div><p class="cycle" id="cycle">Counting hairs (not one by one, promise)…</p><div class="fuse">
+ <div class="src"><i></i><div><b>Photos</b><div class="small muted">Density and flakes on 3 zones</div></div></div>
+ <div class="src"><i></i><div><b>Home test</b><div class="small muted">${c.kit?`Keratin and pH, light-corrected`:`Skipped — photo-only results`}</div></div></div>
+ <div class="src"><i></i><div><b>Your answers</b><div class="small muted">Concern, scalp feel, habits</div></div></div></div></div>`;
+}
+
+const monthPick=()=>S.checks.length>1?`<div class="mp" role="group" aria-label="Choose a check">${S.checks.map((k,i)=>`<button class="${cur()===k?"on":""}" data-sel="${i}">M${k.month}</button>`).join("")}</div>`:"";
+function ring(v){const r=46,C=2*Math.PI*r;return `<div class="ring"><svg viewBox="0 0 110 110"><circle cx="55" cy="55" r="${r}" stroke="rgba(255,255,255,.15)" stroke-width="10" fill="none"/><circle cx="55" cy="55" r="${r}" stroke="#D8F396" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${C*v/100} ${C}"/></svg><div><div><b>${v}</b><small>SCORE</small></div></div></div>`}
+
+function vReport(){
+ const c=cur(),f0=first(),cs=causes(c),s=c.scores.s,d=c.scores.overall-f0.scores.overall,isF=c===f0;
+ const head=cs.length?cs[0].t:"A balanced scalp";
+ return `<div class="hero">${brand(`<button class="iconbtn" data-act="menu" aria-label="Menu">${IC.menu}</button>`)}
+ ${monthPick()}<div class="label" style="color:var(--lime);margin:16px 0 0">${S.checks.length>1?`MONTH ${c.month} CHECK`:"FIRST CHECK"} · ${fmtDate(c.date).toUpperCase()}</div>
+ <h1 style="margin-top:6px">${head}</h1>
+ ${quip(c)?`<div class="quip">${quip(c)}</div>`:""}
+ <div class="score">${ring(c.scores.overall)}<div>${!isF?`<span class="delta">${d>=0?"▲":"▼"} ${Math.abs(d)} pts since month 0</span>`:`<span class="delta">Baseline</span>`}<p class="small" style="opacity:.8;margin:8px 0 0">${esc(c.answers.who)} · ${esc(c.answers.concern.toLowerCase())}${S.profile?` · ${PROFILES[S.profile].name.split(",")[0]}`:""}</p></div></div></div>
+ <div class="wrap"><div class="tiles">${AXES.map(a=>{const v=s[a.id];if(v==null)return `<div class="tile locked"><div class="n">${a.name}</div><div class="val">—</div><div class="small">Needs the home kit</div><div class="from">${a.from}</div></div>`;
+  const dv=f0.scores.s[a.id]!=null&&!isF?v-f0.scores.s[a.id]:null;
+  return `<div class="tile" style="background:var(${a.t});color:var(${a.i})"><div class="n">${a.name}</div><div class="val">${v}</div><div class="row" style="justify-content:space-between"><span class="lv">${level(v)}</span>${dv!=null?`<span class="small" style="font-weight:700">${dv>0?"▲ "+dv:dv<0?"▼ "+(-dv):"= stable"}</span>`:""}</div><div class="bar"><i style="width:${v}%;background:var(${a.b})"></i></div><div class="from">${a.from}</div></div>`}).join("")}</div>
+ ${cs.length?cs.slice(0,2).map((x,i)=>`<div class="card ${i===0?"cause":""}"><div class="label">${i===0?"What we found · the cause":"Also found"}</div><h3 style="font-size:${i===0?19:16}px">${x.t}</h3><p style="margin:6px 0 0;${i===0?"opacity:.88":""}" class="${i?"muted":""}">${x.d}</p><div class="ev">${x.ev.map(e=>`<div>${esc(e)}</div>`).join("")}</div></div>`).join(""):`<div class="card cause"><div class="label">What we found</div><h3 style="font-size:19px">All four readings are in a healthy range</h3><p style="margin:6px 0 0;opacity:.88">${!isF?"Your routine worked. Switch to maintenance and keep checking monthly.":"Keep a gentle routine and check again in a month."}</p></div>`}
+ ${!c.kit?`<div class="card"><div class="label">Unlock the cause</div><p style="margin:0">Photos show symptoms. The home kit tells breakage from true hair fall and checks the pH behind dandruff.</p><button class="btn" style="margin-top:12px" data-act="orderKit">Get the home kit · €4.90</button><p class="small muted" style="margin:8px 0 0">Delivered in under a week · fully refunded as a Vichy Dercos voucher on your first routine purchase.</p></div>`:""}
+ <button class="btn dark" data-tab="routine">See my Vichy Dercos routine ${IC.arrow}</button>
+ ${vEmail(c)}
+ <div class="card" style="margin-top:12px"><div class="label">The evidence</div><div class="thumbs">${ANGLES.map(g=>c.photos[g.id]?`<div><img src="${c.photos[g.id]}" alt="${g.title}"><span>${g.title}</span></div>`:"").join("")}</div>
+ ${c.card?`<div style="border-radius:12px;overflow:hidden;margin-top:8px"><img src="${c.card}" alt="Kit card photo" style="width:100%;display:block"></div>`:""}
+ ${c.kit?`<p class="small muted" style="margin:8px 0 0">Kit read after light correction: vial index ${c.kit.k.toFixed(2)}, pH ${c.kit.ph.toFixed(1)}.</p>`:""}</div>
+ </div><p class="disc">Cosmetic guidance, not a medical diagnosis. Sudden or patchy hair loss, pain or severe redness: see a dermatologist.</p>`;
+}
+
+function vEmail(c){
+ const nd=fmtDate(c.date+30*DAY);
+ if(S.email)return `<div class="card" style="margin-top:12px"><div class="label">Reminder set ✓</div><p style="margin:0">We'll email <b>${esc(S.email)}</b> on ${nd} for your next check, with your new kit.</p></div>`;
+ return `<form class="card" id="mailf" style="margin-top:12px" novalidate><div class="label">Save my results · next check on ${nd}</div><p style="margin:0 0 10px">Get a reminder and your new kit in 30 days, and keep your progress across devices.</p>
+ <label class="small" for="mail" style="font-weight:600">Email</label><input class="field" id="mail" type="email" autocomplete="email" placeholder="you@example.com" required>
+ <label class="check"><input type="checkbox" id="consent"> I agree that Vichy (L'Oréal) stores my scalp check results to send my reminders. I can unsubscribe and delete my data at any time (GDPR).</label>
+ <p class="small" id="mailerr" style="color:#B4432D;margin:0 0 8px;display:none"></p>
+ <button class="btn" type="submit">Remind me in 30 days</button></form>`;
+}
+function vRoutine(){
+ const c=cur(),r=routine(c),tot=r.reduce((a,x)=>a+P[x.id].price,0),cs=causes(c);
+ return `<div class="hero">${brand()}${monthPick()}<div class="label" style="color:var(--lime);margin:16px 0 0">BASED ON YOUR ${fmtDate(c.date).toUpperCase()} CHECK</div><h1 style="margin-top:6px">Your Vichy Dercos routine</h1>
+ <p class="lead">${r.length} product${r.length>1?"s":""}, each matched to a reading${cs.length?` — for “${cs[0].t.toLowerCase()}”`:""}.</p></div>
+ <div class="wrap"><div class="card">${r.map(x=>{const p=P[x.id];return `<div class="prod">${pack(p.col)}<div><div class="b">VICHY DERCOS</div><h3>${p.name}</h3><div class="small muted">${p.sub}</div><div class="why">${x.why}</div><div class="use">${p.use}</div><div class="row" style="justify-content:space-between;margin-top:6px"><span class="price" style="margin:0">${eur(p.price)}</span><a class="buy" href="${p.url}" target="_blank" rel="noopener">Buy on vichy.fr ↗</a></div></div></div>`}).join("")}
+ <div class="row" style="justify-content:space-between;padding-top:12px;border-top:1px solid var(--line);margin-top:4px"><b>Routine total</b><b>${eur(tot)}</b></div></div>
+ <button class="btn" data-act="pharmacy">Show to my pharmacist</button>
+ <div class="card" style="margin-top:12px"><div class="label">Next check · ${fmtDate(c.date+30*DAY)}</div><p style="margin:0">Same 3 photos and a new kit in 30 days. We'll compare and adjust the routine — or move you to maintenance when your scalp is back in range.</p></div>
+ <p class="small muted">Indicative pharmacy prices. One shampoo at a time; treatments only where a reading calls for them.</p></div>`;
+}
+
+function vProgress(){
+ const ch=S.checks,c=last(),f0=first();
+ if(ch.length<2)return `<div class="hero">${brand()}<h1>Your progress</h1><p class="lead">Your baseline is set. Come back in 30 days to see what changed.</p></div><div class="wrap"><div class="card"><div class="label">Next check · ${fmtDate(c.date+30*DAY)}</div><p style="margin:0 0 12px">Redo the photos and the kit. The comparison appears here.</p><button class="btn" data-act="again">Do the next check now (demo)</button></div><button class="btn ghost" data-prof="thomas">See a 3-month example</button></div>`;
+ const keys=["overall","density","flakes","ph","fibre"],names={overall:"Overall",density:"Density",flakes:"Flakes",ph:"pH",fibre:"Fibre"};
+ return `<div class="hero">${brand()}<h1>${ch.length-1} month${ch.length>2?"s":""} of tracking</h1><p class="lead">Score ${f0.scores.overall} → ${c.scores.overall} since ${fmtDate(f0.date)}.</p></div>
+ <div class="wrap"><div class="card"><div class="seg">${keys.map(k=>`<button class="${UI.metric===k?"on":""}" data-metric="${k}">${names[k]}</button>`).join("")}</div><div class="fig"><svg id="chart"></svg></div></div>
+ <div class="card"><div class="label">Month 0 vs now</div><table><thead><tr><th>Reading</th><th>M0</th><th>M${c.month}</th><th>Change</th></tr></thead><tbody>
+ ${AXES.map(a=>{const x=f0.scores.s[a.id],y=c.scores.s[a.id];if(x==null||y==null)return "";const dd=y-x;return `<tr><td>${a.name}</td><td>${x}</td><td>${y}</td><td class="${dd>0?"up":dd<0?"down":""}">${dd>0?"+":""}${dd}</td></tr>`}).join("")}</tbody></table>
+ ${c.kit&&f0.kit?`<p class="small muted" style="margin:8px 0 0">pH ${f0.kit.ph.toFixed(1)} → ${c.kit.ph.toFixed(1)} · vial index ${f0.kit.k.toFixed(2)} → ${c.kit.k.toFixed(2)}</p>`:""}</div>
+ ${f0.photos.parting&&c.photos.parting?`<div class="card"><div class="label">Centre parting · before / after</div><div class="ba"><div><img src="${f0.photos.parting}" alt="Month 0"><span>M0</span></div><div><img src="${c.photos.parting}" alt="Now"><span>M${c.month}</span></div></div></div>`:""}
+ <div class="card"><div class="label">How the routine changed</div>${ch.map(k=>`<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><b class="small">M${k.month}</b><span class="small muted" style="text-align:right">${routine(k).map(x=>P[x.id].name).join(" + ")}</span></div>`).join("")}</div>
+ <button class="btn" data-act="again">Do this month's check</button></div>`;
+}
+function drawChart(){
+ const s=$("#chart");if(!s||!s.clientWidth)return;const W=s.clientWidth,H=s.clientHeight,ch=S.checks,k=UI.metric;
+ const vals=ch.map(c=>k==="overall"?c.scores.overall:c.scores.s[k]).map(v=>v??null);
+ const pl=30,pr=14,pt=14,pb=26,X=i=>pl+(W-pl-pr)*(ch.length===1?.5:i/(ch.length-1)),Y=v=>pt+(H-pt-pb)*(1-v/100);
+ let g="";[0,50,100].forEach(v=>g+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(v)}" y2="${Y(v)}" stroke="#E3E8E5"/><text x="${pl-6}" y="${Y(v)+4}" font-size="11" text-anchor="end" fill="#5C6B68">${v}</text>`);
+ const pts=vals.map((v,i)=>v==null?null:[X(i),Y(v)]).filter(Boolean);
+ g+=`<rect x="${pl}" y="${Y(80)}" width="${W-pl-pr}" height="${Y(62)-Y(80)}" fill="#F5F9E8"/>`;
+ if(pts.length)g+=`<path d="M${pts.map(p=>p.join(",")).join("L")}" fill="none" stroke="#2E7D66" stroke-width="3" stroke-linejoin="round"/>`;
+ vals.forEach((v,i)=>{if(v==null)return;g+=`<circle cx="${X(i)}" cy="${Y(v)}" r="5" fill="#fff" stroke="#2E7D66" stroke-width="2.5"/><text x="${X(i)}" y="${Y(v)-10}" font-size="12" font-weight="700" text-anchor="middle" fill="#0B252B">${v}</text>`});
+ ch.forEach((c,i)=>g+=`<text x="${X(i)}" y="${H-6}" font-size="11" text-anchor="middle" fill="#5C6B68">M${c.month}</text>`);
+ s.innerHTML=g;
+}
+const chartRO=new ResizeObserver(drawChart);
+
+function vApp(){
+ const body=UI.tab==="routine"?vRoutine():UI.tab==="progress"?vProgress():vReport();
+ return body+`<nav class="tabs">${[["report","Report",IC.report],["routine","Routine",IC.bottle],["progress","Progress",IC.chart]].map(([k,n,i])=>`<button class="${UI.tab===k?"on":""}" data-tab="${k}">${i}${n}</button>`).join("")}</nav>`;
+}
+
+function render(){
+ const el=$("#app");
+ el.innerHTML=UI.view==="home"?vHome():UI.view==="flow"?vFlow():UI.view==="analysing"?vAnalysing():vApp();
+ document.documentElement.lang=LANG;translate(el);
+ document.querySelectorAll(".hero").forEach((h,i)=>{if(!h.querySelector(".art"))h.insertAdjacentHTML("afterbegin",hairSVG(11+i,26,.5))});
+ if(UI.view==="app"&&UI.tab==="progress"){const s=$("#chart");if(s){chartRO.disconnect();chartRO.observe(s);drawChart()}}
+ if(UI.view==="flow"&&UI.flow.step==="kit"&&UI.flow.cardCanvas)mountCard();
+}
+function toast(t){$("#layer").innerHTML=`<div class="toast">${esc(tr(t))}</div>`;clearTimeout(toast.t);toast.t=setTimeout(()=>$("#layer").innerHTML="",2600)}
+function sheet(html){$("#layer").innerHTML=`<div class="sheet" data-act="closeSheet"><div>${html}</div></div>`;translate($("#layer"))}
+
+/* ---------- card reading ---------- */
+function mountCard(){
+ const f=UI.flow,w=$("#cardwrap");if(!w)return;w.innerHTML="";const cv=f.cardCanvas;cv.style.width="100%";w.appendChild(cv);
+ const lab={white:"White",liquid:"Vial",pad:"pH"};
+ f.taps.forEach(t=>{const m=document.createElement("div");m.className="mark";m.style.left=(t.x/cv.width*100)+"%";m.style.top=(t.y/cv.height*100)+"%";m.innerHTML=`<b>${tr(lab[t.n])}</b>`;w.appendChild(m)});
+ if(!f.cal)cv.onclick=e=>{const r=cv.getBoundingClientRect(),x=Math.round((e.clientX-r.left)/r.width*cv.width),y=Math.round((e.clientY-r.top)/r.height*cv.height);
+  const need=["white","liquid","pad"].find(n=>!f.taps.some(t=>t.n===n));f.taps.push({n:need,x,y});if(f.taps.length===3)readCard();render()};
+}
+function readCard(){const f=UI.flow,cv=f.cardCanvas,rad=Math.max(4,Math.round(cv.width/120)),g=n=>{const t=f.taps.find(t=>t.n===n);return sampleAt(cv,t.x,t.y,rad)};
+ f.cal=calibrate({white:g("white"),liquid:g("liquid"),pad:g("pad")});f.card=thumb(cv,520)}
+function loadFile(file,cb){const url=URL.createObjectURL(file),img=new Image();img.onload=()=>{cb(img);URL.revokeObjectURL(url)};img.onerror=()=>toast("Could not read that image");img.src=url}
+
+/* ---------- events ---------- */
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-act],[data-ans],[data-prof],[data-tab],[data-metric],[data-sel],[data-lang]");if(!t)return;
+ if(t.dataset.act==="closeSheet"&&e.target!==t)return;
+ const f=UI.flow;
+ if(t.dataset.prof){$("#layer").innerHTML="";buildProfile(t.dataset.prof);return}
+ if(t.dataset.tab){UI.tab=t.dataset.tab;render();scrollTo(0,0);return}
+ if(t.dataset.lang){LANG=t.dataset.lang;try{localStorage.setItem("dercos.lang",LANG)}catch(e){}render();return}
+ if(t.dataset.sel!=null){UI.sel=+t.dataset.sel;render();return}
+ if(t.dataset.metric){UI.metric=t.dataset.metric;render();return}
+ if(t.dataset.ans!=null){const q=Q[f.qi];f.answers[q.id]=t.dataset.ans;render();setTimeout(()=>{if(f.qi<Q.length-1)f.qi++;else{f.step="photos";f.ai=0}render();scrollTo(0,0)},180);return}
+ const a=t.dataset.act;
+ if(t.closest(".sheet")&&a!=="closeSheet")$("#layer").innerHTML="";
+ if(a==="start")startFlow(false);
+ else if(a==="again"){UI.sel=null;startFlow(true)}
+ else if(a==="back"){clearInterval(timerId);
+  if(f.step==="q"){if(f.qi>0)f.qi--;else{UI.view=S.checks.length?"app":"home";UI.flow=null}}
+  else if(f.step==="photos"){if(f.ai>0)f.ai--;else if(S.answers&&S.checks.length){UI.view="app";UI.flow=null}else{f.step="q";f.qi=Q.length-1}}
+  else if(f.step==="kit"){if(f.kitStep>0)f.kitStep--;else{f.step="photos";f.ai=2}}
+  render()}
+ else if(a==="samplePhoto"){const g=ANGLES[f.ai],base=demoValues(f.answers),c=drawSample(g.id,base,f.ai*13+S.checks.length*5+1);f.photos[g.id]=thumb(c);f.metrics[g.id]={density:base.density+(f.ai-1)*2,flakes:g.id==="parting"?base.flakes:null,w:g.id==="temples"?.25:g.id==="parting"?.35:.4};render()}
+ else if(a==="redo"){const g=ANGLES[f.ai];delete f.photos[g.id];delete f.metrics[g.id];render()}
+ else if(a==="nextPhoto"){if(f.ai<2)f.ai++;else{f.step="kit";f.kitStep=0}render();scrollTo(0,0)}
+ else if(a==="kitNext"){clearInterval(timerId);f.tRun=false;f.kitStep++;render();scrollTo(0,0)}
+ else if(a==="noKit"){f.cal=null;f.card=null;finishFlow()}
+ else if(a==="timer"){if(f.tRun)return;f.tRun=true;f.t=f.t??180;render();timerId=setInterval(()=>{f.t--;const el=$("#timer");if(el)el.textContent=fmtT(f.t);if(f.t<=0){clearInterval(timerId);f.tRun=false;f.kitStep++;render()}},1000)}
+ else if(a==="sampleCard"){const v=demoValues(f.answers);f.cardCanvas=drawCard({k:v.k,ph:v.ph},S.checks.length+9);f.taps=Object.entries(CARD_PTS).map(([n,[x,y]])=>({n,x,y}));readCard();render()}
+ else if(a==="resetCard"){f.cardCanvas=null;f.cal=null;f.card=null;f.taps=[];render()}
+ else if(a==="finish")finishFlow();
+ else if(a==="menu")sheet(`<h2>Menu</h2><div class="profiles" style="margin-top:12px">${Object.entries(PROFILES).map(([k,p])=>`<button class="prof" data-prof="${k}"><div><b>${p.name}</b><span>${p.tag}</span></div>${IC.arrow}</button>`).join("")}<button class="btn ghost" data-act="again">New monthly check</button><button class="btn link" data-act="reset">Start over (delete my data)</button></div>`);
+ else if(a==="reset"){S=blank();save();UI={view:"home",tab:"report",flow:null,metric:"overall"};$("#layer").innerHTML="";render();scrollTo(0,0)}
+ else if(a==="closeSheet")$("#layer").innerHTML="";
+ else if(a==="pharmacy")sheet(`<h2>For your pharmacist</h2><p class="muted small">Scan or show this screen at the counter.</p><div class="card"><b>${esc(causes(cur())[0]?.t||"Balanced scalp")}</b><div class="small muted" style="margin-top:4px">Scores: ${AXES.map(x=>cur().scores.s[x.id]!=null?x.name+" "+cur().scores.s[x.id]:"").filter(Boolean).join(" · ")}</div><div style="margin-top:8px">${routine(cur()).map(x=>"• Dercos "+P[x.id].name+" — "+P[x.id].sub).join("<br>")}</div></div><button class="btn" data-act="closeSheet">Done</button>`);
+ else if(a==="order")toast("Demo: hands over to the pharmacy's online shop");
+ else if(a==="orderKit")toast("Demo: kit ordered — your €4.90 comes back as a Dercos voucher");
+});
+document.addEventListener("submit",e=>{
+ if(e.target.id!=="mailf")return;e.preventDefault();
+ const m=$("#mail").value.trim(),ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m),err=$("#mailerr");
+ if(!ok){err.textContent=tr("Please enter a valid email address.");err.style.display="block";return}
+ if(!$("#consent").checked){err.textContent=tr("Please tick the consent box to receive reminders.");err.style.display="block";return}
+ S.email=m;save();render();toast("Demo: reminder scheduled — no email is actually sent");
+});
+document.addEventListener("change",e=>{
+ const inp=e.target.closest("[data-file]");if(!inp||!inp.files[0])return;const f=UI.flow;
+ loadFile(inp.files[0],img=>{
+  if(inp.dataset.file==="photo"){const g=ANGLES[f.ai],m=analyzeReal(g.id,img);f.photos[g.id]=thumb(img);f.metrics[g.id]={density:m.density,flakes:g.id==="parting"?m.flakes:null,w:g.id==="temples"?.25:g.id==="parting"?.35:.4}}
+  else{const c=document.createElement("canvas"),w=Math.min(1200,img.width);c.width=w;c.height=Math.round(w*img.height/img.width);c.getContext("2d").drawImage(img,0,0,c.width,c.height);f.cardCanvas=c;f.taps=[];f.cal=null}
+  render()});
+});
+/* sample values for a new check follow the answers; later months improve */
+function demoValues(a){
+ const m=S.checks.length,k=Math.pow(.55,m);
+ const base={"Hair fall":{density:46,flakes:6,ph:5.3,k:.14},"Dandruff & itching":{density:80,flakes:55,ph:6.6,k:.3},"Oily scalp":{density:78,flakes:22,ph:6.0,k:.2},"Dull, breaking hair":{density:82,flakes:5,ph:5.3,k:.72}}[a.concern]||{density:80,flakes:6,ph:5.2,k:.2};
+ const b={...base};if(a.treat==="Often")b.k=Math.max(b.k,.6);if(a.feel==="Itchy")b.flakes+=12;if(a.feel==="Sensitive, reactive")b.ph+=.3;
+ const goal={density:80,flakes:4,ph:5.1,k:.2};
+ return{density:goal.density+(b.density-goal.density)*k,flakes:Math.round(goal.flakes+(b.flakes-goal.flakes)*k),ph:Math.round((goal.ph+(b.ph-goal.ph)*k)*10)/10,k:Math.round((goal.k+(b.k-goal.k)*k)*100)/100,red:a.feel==="Itchy"&&m<2};
+}
+render();
+}
+</script>
+</body>
+</html>
